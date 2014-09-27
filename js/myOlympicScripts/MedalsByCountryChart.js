@@ -141,5 +141,6 @@ function getJSONOlympicData(dataJSON)
                     + "  | Bronze Medals: " + d.bronzemedals);
                 })
                 .attr("id", "myNode")
+                .style("text-indent", "50px")
         });
 }
