@@ -130,7 +130,7 @@ function getJSONOlympicData(dataJSON)
             if (dataJSON[j].country===d.country)
                     listOfAthletes[listOfAthletes.length] = dataJSON[j]; 
         d3.select("list").data(listOfAthletes).enter().append("p")
-            .text(function (d, i){
+            .text(function (d){
                 return ("Name: " + d.athlete 
                     + " | Age: " + d.age 
                     + " | Country: " + d.country 

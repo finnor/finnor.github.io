@@ -61,6 +61,11 @@ function getJSONOlympicData(dataJSON)
         }
     }
 
+
+    //sort table by total medal count
+    tableData.sort(function (a, b) {
+        return b.totalmedals - a.totalmedals;
+        });
   
     //Build Table Header
     var headerTable = ["Sport", "Gold Medals", "Silver Medals", "Bronze Medals", "Total Medals"];
