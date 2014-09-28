@@ -8,66 +8,6 @@
  * Designed and built with all the love in the world by @mdo and @fat.
  */
 
-
-// My Style ------------------------------------------------
-table {
-    border-collapse: collapse;
-}
-
-td {
-    text-align: center;
-}
-
-table, td, th {
-    border: 1px solid black;
-}
-
-@media (min-width: 980px) {
-    body {
-        padding-top: 60px;
-    }
- }
-
- #myNode{
-    white-space: nowrap;
- }
-
-
-.axis {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
-}
-
-div.tooltip {   
-  position: absolute;           
-  text-align: center;           
-  width: 100px;                  
-  height: 28px;                 
-  padding: 2px;             
-  font: 12px sans-serif;        
-  background: lightsteelblue;   
-  border: 0px;      
-  border-radius: 8px;           
-  pointer-events: none;         
-}
-
-
-
-//--------------------------------------------------------
-
-
-
-
 .clearfix {
   *zoom: 1;
 }
