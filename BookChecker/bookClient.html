@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Book Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Adrian Flannery">
+
+    <!-- Bootstrap Twitter Style -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../css/SilverlightApp.css" rel="stylesheet">
+
+    
+        <!-- Silverlight  Script  -->
+    <script src="../js/BookChecker/addBook.js"></script>
+	
+  </head>
+
+
+  <body>
+      <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">AFWork</a>
+            <ul class="nav">
+			  <li><a href="../DNAAlignment/DNAAlignmentXY.html">DNA Alignment</a></li>
+              <li><a href="../Minesweeper/MS.html">Minesweeper</a></li>
+			  <li><a href="#">Book Checker</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+		h1>Book Information for Course</h1>
+
+		<!-- Form for teacher to add the correct book information -->
+		<form name="courseBookInfo" method="get" action="bookServer.php">
+		<p>
+			Course Name:
+			<input type="text" name="course" />
+			<p>
+			Book Title:
+			<input type="text" name="bookTitle" />
+			Book Publisher:
+			<input type="text" name="bookPub" />
+			Book Edition:
+			<input type="text" name="bookEd" />
+			Book Date:
+			<input type="text" name="bookDate" />
+			<p>
+			Book Title 2:
+			<input type="text" name="bookTitle2" />
+			Book Publisher 2:
+			<input type="text" name="bookPub2" />
+			Book Edition 2:
+			<input type="text" name="bookEd2" />
+			Book Date 2:
+			<input type="text" name="bookDate2" />
+				<button type = "button"
+					onclick = "addTeacher(form.course.value, form.bookTitle.value, form.bookPub.value, form.bookEd.value, form.bookDate.value, form.bookTitle2.value, form.bookPub2.value, form.bookEd2.value, form.bookDate2.value)">
+					Add to database
+				</button>
+		</form>
+		</p>
+
+
+	
+	
+	
+	
+	
+	
+		<h2>Add Student Info and Check Book</h2>
+
+		<!--Form for student to add his book information and check if correct -->
+		<form name="bookInfo" method="get" action="studentServer.php">
+		<p>	
+			Course Name:
+			<input type="text" name="course" />
+			First Name:
+			<input type="text" name="first" />
+			Last Name:
+			<input type="text" name="last" />
+			<p>
+			Book Title:
+			<input type="text" name="bookTitle" />
+			Book Publisher:
+			<input type="text" name="bookPub" />
+			Book Edition:
+			<input type="integer" name="bookEd" />
+			Book Date:
+			<input type="text" name="bookDate" />
+			<p>
+			Book Title 2:
+			<input type="text" name="bookTitle2" />
+			Book Publisher 2:
+			<input type="text" name="bookPub2" />
+			Book Edition 2:
+			<input type="integer" name="bookEd2" />
+			Book Date 2:
+			<input type="text" name="bookDate2" />
+				<button type = "button"
+					onclick = "addStudent(form.course.value, form.first.value, form.last.value, form.bookTitle.value, form.bookPub.value, form.bookEd.value, form.bookDate.value, form.bookTitle2.value, form.bookPub2.value, form.bookEd2.value, form.bookDate2.value)">
+					Add to database and Check Book
+				</button>
+		</form>
+		</p>
+		<p>Student Database: <span id="studentArray"></span></p>
+
+	</body>
+</html>
