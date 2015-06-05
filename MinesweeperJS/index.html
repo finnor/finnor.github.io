@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Adrian Flannery</title>
+    <title>MinesweeperJS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Adrian Flannery">
@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     
     <!-- Custom CSS -->
-    <link href="css/siteStyle.css" rel="stylesheet">
+    <link href="../css/siteStyle.css" rel="stylesheet">
+    <link href="../css/MinesweeperJS/myMineStyle.css" rel="stylesheet">
   </head>
 
   <body>
@@ -27,30 +28,44 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Adrian Flannery</a>
+				<a class="navbar-brand" href="../">Adrian Flannery</a>
 			</div>  
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="DNAAlignment/">DNAAlignmentXY</a>
-					<li><a href="MinesweeperJS/">MinesweeperJS</a></li>
-					<li><a href="MinesweeperCSharp/">MineSweeperC#</a></li>
+					<li><a href="../DNAAlignment/">DNAAlignmentXY</a>
+					<li class="active"><a href="#">MinesweeperJS</a></li>
+					<li><a href="../MinesweeperCSharp/">MineSweeperC#</a></li>
 					<li class="dropdown">
-						<a href="D3Demo/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">D3 Demo <span class="caret"></span></a>
+						<a href="../D3Demo/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">D3 Demo <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="D3Demo/">Index</a></li>
-			     	        <li><a href="D3Demo/MedalsByCountry.html">Q1</a></li>
-           					<li><a href="D3Demo/SportsByBronzeMedals.html">Q2</a></li>
-              				<li><a href="D3Demo/SportsByMedalCount.html">Q3</a></li>
+							<li><a href="../D3Demo/">Index</a></li>
+			     	        <li><a href="../D3Demo/MedalsByCountry.html">Q1</a></li>
+           					<li><a href="../D3Demo/SportsByBronzeMedals.html">Q2</a></li>
+              				<li><a href="../D3Demo/SportsByMedalCount.html">Q3</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
-    </nav>   
+    </nav>
+
+	<!-- Content -->
+    <div class="container center">
+	    <table cellspacing="0" cellpadding="0" class="board">
+		</table>
+		<br>
+		<button type="button" class="board-btn">Make Board</button> 
+		<button type="button" class="move-btn">Get Move</button> 
+		<br><br>
+		<p>Move: </p>
+		<p class="move"></p>
+    </div> 
+    
     
     <!-- Scripts -->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="../js/MinesweeperJS/mine.js"></script>
     
   </body>
 </html>
