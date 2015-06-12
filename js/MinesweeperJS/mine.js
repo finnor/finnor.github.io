@@ -1,15 +1,137 @@
 // Main
-var game = new Game();
+var game;
 createFirstGame(30,16,99);
+var solver = new Solver(game);
+game.onReveal = solver.updateEdges;
+game.context = solver;
+var movesPosition = -1;
+
+/**
+ * Event handler find a move
+ */
+$(".move-btn").click(function() {
+	movesPosition++;
+	var move = solver.moves[movesPosition];
+	if (movesPosition>0 && move==null) {
+		movesPosition = -1;
+	} else if (move!=null) {
+		$(".move").text("(" + move.x + ", " + move.y + ") " + move.message);
+		displayMove(move);
+	} else {
+		$(".move").text("No Moves");
+	}
+});	
+
+function displayMove(move) {
+	for(var i=0; i<move.canClick.length; i++) {
+		var cell = $("#btn" + move.canClick[i][0] + "-" + move.canClick[i][1]);
+		cell.addClass("clickable");
+	}
+	
+	for(var i=0; i<move.canMine.length; i++) {
+		var cell = $("#btn" + move.canMine[i][0] + "-" + move.canMine[i][1]);
+		cell.addClass("mineable");
+	}
+}
 
 /**
  * Class Representation of the board
  * @constructor
  */
-function Game() {
+function Game(x, y, mines) {
 	this.board = [];
-	this.visible = []
+	this.visible = [];
+	this.flag = [];
+	this.mineCount = mines;
 	this.started = false;
+	this.over = false;
+	this.squaresLeft = (x * y) - mines;
+	this.x = x;
+	this.y = y;
+	this.lastXPlayed = 0;
+	this.lastYPlayed = 0;
+	this.edges;
+	
+	/**
+	 * Counts the number of flags in neighboring cells
+	 *
+	 * @param {int} x The column clicked
+	 * @param {int} y The row clicked 
+	 */
+	this.getNeighboringFlagCount = function(x, y, flag) {
+		flagCount = 0;
+		
+	    flagCount = flag[x-1][y-1] + flag[x][y-1] + flag[x+1][y-1] +
+	    			flag[x-1][y] + flag[x+1][y] +
+	    			flag[x-1][y+1] + flag[x][y+1] + flag[x+1][y+1];
+	    
+	    return flagCount;
+	}
+	
+	this.createEdgesBoard = function () {
+		this.edges = [];
+		for (var i=0; i<=game.x+1; i++) {
+			this.edges[i] = [];
+			for (var j=0; j<=game.y+1; j++) {
+				this.edges[i][j] = 0;
+			}
+		}
+		
+		//Iterate across entire game board
+		for (var i=1; i<=game.x; i++) {
+			for (var j=1; j<=game.y; j++) {
+				var visibleCount = 0;
+				//At each cell, count visible neighbors
+				//Edge cases - corners
+				if (i==1 && j==1) 
+					visibleCount = !game.visible[i+1][j] + !game.visible[i][j+1] + !game.visible[i+1][j+1];
+				else if (i==game.x && j==1)
+					visibleCount = !game.visible[i-1][j] + !game.visible[i][j+1] + !game.visible[i-1][j+1];
+				else if (i==1 && j==game.y)
+					visibleCount = !game.visible[i+1][j] + !game.visible[i][j-1] + !game.visible[i+1][j-1];
+				else if (i==game.x && j==game.y)
+					visibleCount = !game.visible[i-1][j] + !game.visible[i][j-1] + !game.visible[i-1][j-1];
+				//Edges but not corners
+				else if (i==1)
+					visibleCount =  !game.visible[i][j-1] + !game.visible[i+1][j-1] +
+						!game.visible[i+1][j] + !game.visible[i][j+1] + !game.visible[i+1][j+1];
+				else if (i==game.x)
+					visibleCount =  !game.visible[i][j-1] + !game.visible[i-1][j-1] +
+						!game.visible[i-1][j] + !game.visible[i][j+1] + !game.visible[i-1][j+1];
+				else if (j==1)
+					visibleCount =  !game.visible[i][j+1] + !game.visible[i+1][j+1] +
+						!game.visible[i+1][j] + !game.visible[i-1][j+1] + !game.visible[i-1][j];
+				else if (j==game.y)
+					visibleCount =  !game.visible[i][j-1] + !game.visible[i+1][j-1] +
+						!game.visible[i+1][j] + !game.visible[i-1][j-1] + !game.visible[i-1][j];
+				//Else add all neighbors
+				else 
+					visibleCount = !game.visible[x-1][y-1] + !game.visible[x][y-1] + !game.visible[x+1][y-1] +
+    					!game.visible[x-1][y] + !game.visible[x+1][y] +
+    					!game.visible[x-1][y+1] + !game.visible[x][y+1] + !game.visible[x+1][y+1];
+			    
+			    this.edges[i][j] = visibleCount;
+			}
+		}
+	}
+	
+	this.isEdge = function (x, y) {
+		if (this.visible[x][y]==true && this.edges[x][y]>0)
+			return true;
+		else
+			return false;
+	}
+	
+	this.updateEdges = function(x, y) {
+		for(var i=x-1; i<=x+1; i++) {
+			for(var j=y-1; j<=y+1; j++) {
+				if (!(i==x && j==y)) {
+					if (this.board[i][j]<10)
+						this.edges[i][j]--;
+				}
+			}
+		}
+	}
 }
 
 /**
@@ -31,35 +153,100 @@ function createInitialBoardUI(x, y) {
 	var boardUI = $(".board");
 	boardUI.html(tableHTML);
   
+	
+	var singleClick = true;
+	var rightDown = false;
+	var leftDown = false;
+	
 	//Create event for left click -- reveal a spot
-	$(".cell-btn").click(function(){
-		if (!$(this).hasClass("flag")) {
-			var x = parseInt(this.getAttribute('data-x'));
-			var y = parseInt(this.getAttribute('data-y'));
-			//Handling for start of game where first click can't be mine
-			if (!game.started) {
-				if (game.board[x][y]>=10) {
-					changeBoard(x, y);
+	$(".cell-btn").click(function(){		
+		//If not part of a right + left click
+		if (singleClick) {
+			if (!$(this).hasClass("flag")) {
+				$(this).removeClass("clickable");
+				var x = parseInt(this.getAttribute('data-x'));
+				var y = parseInt(this.getAttribute('data-y'));
+				//Handling for start of game where first click can't be mine
+				if (!game.started) {
+					startTimer();
+					if (game.board[x][y]>=10) {
+						changeBoard(x, y);
+					}
 				}
+				game.started = true;
+				click(x, y, $(this));
 			}
-			game.started = true;
-			var value = resolveCellOutput(game.board[x][y], $(this));
-			gameMechanics(value, x, y);
 		}
 	});
 	
 	//Create event for right click -- flag a mine
 	$(".cell-btn").on("contextmenu", function(e) {
 		e.preventDefault();
-		if(!($(this).hasClass("disabled"))) {
-			if ($(this).hasClass("flag")) {
-				$(this).removeClass("flag");
-				$(this).text("\xa0");
-			} else {
-				$(this).addClass("flag");
-				$(this).text("|");
-			}     
+		
+		//If not part of a right + left click
+		if (singleClick) {
+			if(!($(this).hasClass("disabled"))) {
+				var x = parseInt(this.getAttribute('data-x'));
+				var y = parseInt(this.getAttribute('data-y'));
+				if ($(this).hasClass("flag")) {
+					$(this).removeClass("flag");
+					game.flag[x][y] = false;
+					game.mineCount++;
+				} else {
+					$(this).removeClass("mineable");
+					$(this).addClass("flag");
+					game.flag[x][y] = true;
+					game.mineCount--;
+				}  
+				solver.getAllPlays();
+				movesPosition = -1;
+				$(".mine-count").text(game.mineCount);
+			}
 		}
+	});	
+	
+	//Create event for right+left click -- clear neighbors
+	$(".cell-btn").mousedown(function(e) {
+		singleClick = true;
+		if( e.button == 2 )
+			rightDown = true;
+		if (e.button == 0)
+			leftDown = true;
+		
+		//Can only right+left click on cells that are visible
+		if (rightDown && leftDown) {
+			var x = parseInt(this.getAttribute('data-x'));
+			var y = parseInt(this.getAttribute('data-y'));
+			if (game.visible[x][y]) {
+				if (game.board[x][y] == game.getNeighboringFlagCount(x, y, game.flag)) {
+					//Display what cells would be clicked on right+left click
+					showClickableNeighbors(x, y);
+				}
+			}
+		}
+	});	
+	
+	//Create event for right+left click -- clear neighbors
+	$(".cell-btn").mouseup(function(e) {
+		if (rightDown && leftDown) {
+			var x = parseInt(this.getAttribute('data-x'));
+			var y = parseInt(this.getAttribute('data-y'));
+			singleClick = false;
+			
+			//Can only right+left click on cells that are visible
+			if (game.visible[x][y]) {
+				//Remove css from the show clickable neighbors
+				$(".cell-btn").removeClass("rl-click");
+				var flagCount = game.getNeighboringFlagCount(x, y, game.flag);
+				if (flagCount==game.board[x][y]) {
+					clearNeighbors(x, y);
+				}
+			}
+		}
+		if( e.button == 2 )
+			rightDown = false;
+		if (e.button == 0)
+			leftDown = false;
 	});
 }
 
@@ -85,15 +272,22 @@ function createFirstGame(x, y, mines) {
  *  @return {Game} 
  */
 function generateBoard(x, y, mineNumber) {
+	stopTimer();
+	clearTimer();
 	
-	game.board = [[0]];
-	game.visible = [[0]];
+	game = new Game(x, y, mineNumber);
+	
+	$(".mine-count").text(game.mineCount);
+	
 	for (var i=0; i<x+2; i++) {
-		game.board[i] = [0];
-		game.visible[i] = [0];
+		game.board[i] = [];
+		game.visible[i] = [];
+		game.flag[i] = [];
+		
 		for (var j=0; j<y+2; j++) {
 			game.board[i][j] = 0;
 			game.visible[i][j] = false;
+			game.flag[i][j] = false;
 		}
 	}
 	
@@ -123,6 +317,7 @@ function generateBoard(x, y, mineNumber) {
 		}
 	}
   
+	game.createEdgesBoard();
 	game.started = false;
 	return game;
 }
@@ -213,6 +408,66 @@ function changeBoard(x, y) {
 }
 
 /**
+ * Shows what cells would be clicked by right+left click
+ *
+ * @param {int} x The column clicked
+ * @param {int} y The row clicked 
+ */
+function showClickableNeighbors(x, y) {
+	for (var i=x-1; i<=x+1; i++) {
+		for (var j=y-1; j<=y+1; j++) {
+			if (!(i==x && j==y)) {
+				if (game.flag[i][j]==false && game.visible[i][j]==false) {
+					var cell = $("#btn" + i + "-" + j);
+					cell.addClass("rl-click");
+				}
+			}
+		}
+	}	
+}
+
+
+/**
+ * Clears all neighbors if the number of flags equals the spot clicked
+ *
+ * @param {int} x The column clicked
+ * @param {int} y The row clicked 
+ */
+function clearNeighbors(x, y) {
+	for (var i=x-1; i<=x+1; i++) {
+		for (var j=y-1; j<=y+1; j++) {
+			if (!(i==x && j==y)) {
+				if (i!=0 && i!=(game.board.length-1) && j!=0 && j!=(game.board[0].length-1)) {
+					if (game.flag[i][j]==false && game.visible[i][j]==false) {
+						var cell = $("#btn" + i + "-" + j);
+						click(i, j, cell);
+					}
+				}
+			}
+		}
+	}
+}
+
+/**
+ * Directs response to actions based on value of clicked cell
+ *
+ * @param {int} x The column clicked
+ * @param {int} y The row clicked 
+ * @param {<button>} cell The button that was clicked   
+ */
+function click(x, y, cell) {
+	var value = resolveCellOutput(game.board[x][y], cell);
+	gameMechanics(value, x, y);
+	game.lastXPlayed = x;
+	game.lastYPlayed = y;
+	if (!game.over) 
+		solver.getAllPlays();
+	movesPosition = -1;
+}
+
+
+
+/**
  * Directs response to actions based on value of clicked cell
  *
  * @param {String} value The value of the cell
@@ -220,17 +475,29 @@ function changeBoard(x, y) {
  * @param {int} y The row clicked   
  */
 function gameMechanics(value, x, y) {
+	game.visible[x][y] = true;
+	
 	switch (value) {
 		//Mine
 		case "X":
-			gameOver();
+			if (game.over==false) {
+				game.over=true;
+				gameOver(x, y);
+			}
 			break;
 		//Empty space
 		case "\xa0":
-			explode(x, y, game.visible.slice());
+			explode(x, y);
+			break;
+		default:
+			console.debug(x + "|" + y);
+			game.squaresLeft--;
+			game.updateEdges(x, y);
 			break;
 	}
-	game.visible[x][y] = true;
+	
+	if (game.squaresLeft==0)
+		gameWon();
 }
 
 /**
@@ -274,11 +541,15 @@ function resolveCellOutput(value, cell) {
 	      break;
 	    default:
 	      value = "X";
-	      cell.addClass("mine");
+	      if (game.over==true)
+	    	  cell.addClass("mine");
+	      else
+	    	  cell.addClass("mine-cause");
 	      break;
 	}
 	
-	cell.text(value);
+	if (value!="X")
+		cell.text(value);
 	
 	return value;
 }
@@ -288,23 +559,22 @@ function resolveCellOutput(value, cell) {
  *
  * @param {int} x The column clicked
  * @param {int} y The row clicked   
- * @param {int[][]} visited An array of that which cells have been processed
  */
-function explode(x, y, visited) {
-	console.debug(x + "|" + y + "|" + visited[x][y]);
-	visited[x][y] = true;
-	
+function explode(x, y) {
 	var cell = $("#btn" + x + "-" + y);
 	if (!(cell.hasClass("flag"))) {
-		game.visible[x][y] == true;
-	    resolveCellOutput(game.board[x][y], cell);
+		game.visible[x][y] = true;
+		game.squaresLeft--;
+		game.updateEdges(x, y);
+	    var value = resolveCellOutput(game.board[x][y], cell);
 	    
 	    if (game.board[x][y]==0) {
 	    	for (var i=x-1; i<=x+1; i++) {
 	    		for (var j=y-1; j<=y+1; j++) {
-	    			if (!(i==0 || i==(game.board.length-1) || y==0 || y==(game.board[0].length-1))) {
-	    				if (visited[i][j]==false) {
-	    					explode(i, j, visited);
+	    			if (i!=0 && i!=(game.board.length-1) && j!=0 && j!=(game.board[0].length-1)) {
+	    				if (game.visible[i][j]==false) {
+	    					game.visible[i][j] = true;
+	    					explode(i, j);
 	    				}
 	    			}
 	    		}
@@ -315,15 +585,42 @@ function explode(x, y, visited) {
 
 /**
  * Reveals and disables board when a mine is clicked
+ * @param {int} x The column clicked
+ * @param {int} y The row clicked   
  */
-function gameOver() {
-	for (var i=0; i<game.board.length; i++) {
-		for (var j=0; j<game.board[i].length; j++) {
+function gameOver(x, y) {
+	stopTimer();
+	$(".board-btn").removeClass("board-btn-normal");
+	$(".board-btn").addClass("board-btn-game-over");
+	
+	for (var i=1; i<game.board.length-1; i++) {
+		for (var j=1; j<game.board[i].length-1; j++) {
+			if (!(x==i && y==j)) {
+				cell = $("#btn" + i + "-" + j);
+				cell.addClass("disabled");
+				value = resolveCellOutput(game.board[i][j], cell);
+				if (cell.hasClass("flag") && value!="X") {
+					cell.text("X");
+				}
+			}
+		}
+	}
+}
+
+/**
+ * Disables board when game is won
+ */
+function gameWon() {
+	stopTimer();
+	$(".board-btn").removeClass("board-btn-normal");
+	$(".board-btn").addClass("board-btn-win");
+	$(".cell-btn").addClass("disabled");
+	
+	for (var i=1; i<game.board.length-1; i++) {
+		for (var j=1; j<game.board[i].length-1; j++) {
 			cell = $("#btn" + i + "-" + j);
-			value = resolveCellOutput(game.board[i][j], cell);
-			cell.text(value);
-			cell.addClass("disabled");
-			cell.removeClass("flag");
+			if (game.board[i][j]>=10)
+				cell.addClass("flag");
 		}
 	}
 }
@@ -333,13 +630,17 @@ function gameOver() {
  */
 $(".board-btn").click(function () {
   $(".cell-btn").removeClass("disabled");
+  $(this).removeClass();
+  $(this).addClass("board-btn center board-btn-normal");
   game = generateBoard(30, 16, 99);
+  solver = new Solver(game);
+  game.onReveal = solver.updateEdges;
+  game.context = solver;
   $(".cell-btn").text("\xa0");
   $(".cell-btn").attr('class','cell-btn');
 });
 
-/**
- * Event handler find a move
- */
-$(".move-btn").click(function() {
+$(".board-btn").on("contextmenu", function(e) {
+	e.preventDefault();
 });
+
