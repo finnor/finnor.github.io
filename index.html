@@ -56,6 +56,28 @@
         </div>
     </nav>
     
+    <script>
+        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        if (iOS)
+        	$('.navbar').addClass('navbar-fixed-top');
+        else {
+            navbar = $('.navbar');
+            function determineNavPosition() {
+                winHeight = $(window).height();
+                navHeight = navbar.height(); 
+                if ($(window).scrollTop() > (winHeight - navHeight)) {
+                    navbar.addClass('navbar-fixed-top');
+                    navbar.removeClass('floating');
+                } else {
+                    navbar.removeClass('navbar-fixed-top');
+                    navbar.addClass('floating');
+                }
+            }
+            determineNavPosition();
+            $(window).scroll(determineNavPosition);
+        }
+    </script>
+    
     <div class="welcome">
         <div class="welcome-message">
             <span>You found me! Welcome!  <i class="fa fa-hand-spock-o"></i>
@@ -265,22 +287,5 @@
 	        </div>
         </div>
     </div>
-    <script>
-	    navbar = $('.navbar-color');
-	    function determineNavPosition() {
-		    console.log(true);
-	        winHeight = $(window).height();
-	        navHeight = navbar.height(); 
-	        if ($(window).scrollTop() > (winHeight - navHeight)) {
-	        	navbar.addClass('navbar-fixed-top');
-	        	navbar.removeClass('floating');
-	        } else {
-	        	navbar.removeClass('navbar-fixed-top');
-	        	navbar.addClass('floating');
-	        }
-	    }
-	    determineNavPosition();
-	    $(window).scroll(determineNavPosition);
-    </script>
   </body>
 </html>
