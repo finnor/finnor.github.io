@@ -10,46 +10,277 @@
     <!-- Bootstrap Twitter Style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <!--  Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
     
     <!-- Custom CSS -->
     <link href="css/siteStyle.css" rel="stylesheet">
-  </head>
-
-  <body>
-  
-	<!-- Navbar -->
-    <nav class="navbar navbar-default navbar-color navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Adrian Flannery</a>
-			</div>  
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="DNAAlignment/">DNAAlignmentXY</a>
-					<li><a href="MinesweeperJS/">MinesweeperJS</a></li>
-					<li class="dropdown">
-						<a href="D3Demo/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">D3 Demo <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="D3Demo/">Index</a></li>
-			     	        <li><a href="D3Demo/MedalsByCountry.html">Q1</a></li>
-           					<li><a href="D3Demo/SportsByBronzeMedals.html">Q2</a></li>
-              				<li><a href="D3Demo/SportsByMedalCount.html">Q3</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div><!--/.nav-collapse -->
-		</div>
-    </nav>   
+    
+    
     
     <!-- Scripts -->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
     
+    
+    <!-- My scripts -->
+    <script src="js/chart_creator.js"></script>
+  </head>
+
+  <body class="index-body">
+  
+   
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-color">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Adrian Flannery</a>
+            </div>  
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="DNAAlignment/">DNAAlignmentXY</a>
+                    <li><a href="MinesweeperJS/">MinesweeperJS</a></li>
+                    <li><a href="D3Demo/">D3Demo</a></li>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+    
+    <div class="welcome">
+        <div class="welcome-message">
+            <span>You found me! Welcome!  <i class="fa fa-hand-spock-o"></i>
+            </span>
+        </div>
+    </div>
+    
+    <div class="container main">
+        <div class="content-section">
+	        <h1 class="section-header"><i class="fa fa-user"></i> About Me</h1>
+	        <div class="row featurette about-me">
+	            <p>My name is Adrian Flannery. I am software developer based out of Birmingham, Alabama.</p>
+	        </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="content-section">
+	        <h1 class="section-header"><i class="fa fa-pie-chart"></i>Metrics</h1>
+	        <div class="row featurette metric-charts">
+	            <span id="efficiency-gauge" class="gauge small-chart col-md-6"></span>
+	            <span id="hobby-chart" class="small-chart col-md-6"></span>
+	        </div>
+	        <script>
+	            var windowWidth = $(window).width();
+	            var chartWidth = 200;
+	            if (windowWidth<=480)
+	            	chartWidth = 200;
+	            else if (windowWidth<=800)
+	            	chartWidth = 300;
+	            else
+	            	chartWidth = 400;
+	            	
+		        /**
+		
+		         *                "data": {
+		         *                    "label":,
+		         *                    "value":,
+		         *                    "link":,
+		         *                    "linkParam1":,
+		         *                    "linkParam2":
+		         */
+		        var paramsPie = {
+		                 "general": {
+		                     "width": chartWidth,
+		                     "element": "#hobby-chart",
+		                     "isPercent": true,
+		                     "chartLabel": "Outside Work",
+		                 },
+		                 "data": [
+	                         {
+			                     "label":"LoL",
+			                     "value": 30,
+			                     "link": "goToOP",
+	                         },
+	                         {
+	                             "label":"Education",
+	                             "value": 30,
+	                         },
+	                         {
+	                             "label":"Coding",
+	                             "value": 30,
+	                         },
+	                         {
+	                        	 "label":"Life",
+	                             "value": 1,
+	                         },
+	                         {
+	                        	 "label":"Netflix",
+	                             "value": 10,
+	                         },
+	                         {
+	                             "label":"Exercise",
+	                             "value": 20,
+	                         },
+		                 ]
+		         };
+	        
+	        var paramsGauge = {
+	        	    "general" : {
+	        	    	"size": chartWidth,
+	        	    	"element": "#efficiency-gauge",
+	        	    	"chartTitle": "Work Productivity",
+	        	    }
+	        }
+	        
+		        function goToOP() {
+	        		window.open("http://na.op.gg/summoner/userName=Finnor", "_blank");
+	        	}
+		        
+		        generatePieChart(paramsPie); 
+		        generateGauge(paramsGauge);
+	        </script>
+        </div>
+        
+        <br />
+        <br />
+        
+        <div class="content-section">
+	        <h1 class="section-header"><i class="fa fa-folder-open-o"></i> Project Snapshots</h1>
+	        <div class="row featurette">
+	            <div class="col-md-4">
+	                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+	            </div>
+	            <div class="col-md-8">
+	                <h2 class="featurette-heading">DNA Alignment XY</h2>
+	                <p class="lead text-muted">In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local 
+	                    and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. 
+	                    <a href="DNAAlignment/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
+	                </p>
+	            </div>
+	        </div>
+	        <hr class="featurette-divider">
+	        <div class="row featurette">
+	            <div class="col-md-4">
+	                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+	            </div>
+	            <div class="col-md-8">
+	                <h2 class="featurette-heading"><a href="MinesweeperJS/">MinesweeperJS</a></h2>
+	                <p class="lead text-muted">An early iteration of a project to help illustrate strategies in solving Minesweeper. 
+	                    <a href="MinesweeperJS/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
+	                </p>
+	            </div>
+	        </div>
+	        <hr class="featurette-divider">
+	        <div class="row featurette">
+	            <div class="col-md-4">
+	                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+	            </div>
+	            <div class="col-md-8">
+	                <h2 class="featurette-heading"><a href="D3Demo/">D3 Demo</a></h2>
+	                <p class="lead text-muted">This is a small demo of some of the capabilities of D3.js. 
+	                    <a href="D3Demo/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
+	                </p>
+	            </div>
+	        </div>
+        </div>
+        
+        <br />
+        <br />
+        
+        <div class="content-section">
+            <h1 class="section-header"><i class="fa fa-laptop"></i> Skills</h1>
+            <div class="row featurette">
+                TBA
+            </div>
+        </div>
+        
+        <br />
+        <br />
+        
+        <div class="content-section">
+	        <h1 class="section-header"><i class="fa fa-building"></i> Employment</h1>
+	        <div class="row timeline-entry">
+	            <div class="col-md-8">
+	                <p class="timeline-title">Informatics Analyst I</p>
+	                <ul>
+	                    <li>TBA</li>
+	                </ul>
+	            </div>
+	            <div class="col-md-4">
+	                <p>Nov 2014 - Present</p>
+		            <p>University of Alabama at Birmingham</p>
+		            <p>Department of Pathology - Division of Informatics</p>
+	            </div>
+	        </div>
+        </div>
+        
+        <br />
+        <br />
+        
+        <div class="content-section">
+	        <h1 class="section-header"><i class="fa fa-graduation-cap"></i> Education</h1>
+	        <div class="row timeline-entry">
+	            <div class="col-md-8">
+	                <p class="timeline-title">MSSE - Software Engineering</p>
+	                <ul>
+	                    <li>TBA</li>
+	                </ul>
+	            </div>
+	            <div class="col-md-4">
+	                <p>Fall 2011 - Spring 2013</p>
+	                <p>University of Alabama at Huntsville</p>
+	            </div>
+	        </div>
+	        <hr class="featurette-divider">
+	        <div class="row timeline-entry">
+	            <div class="col-md-8">
+	                <p class="timeline-title">BS - Computer and Information Science</p>
+	                <ul>
+	                    <li>TBA</li>
+	                </ul>
+	            </div>
+	            <div class="col-md-4">
+	                <p>Fall 2005 - Spring 2011</p>
+	                <p>University of Alabama at Birmingham</p>
+	            </div>
+	        </div>
+        </div>
+        <br />
+        <br />
+        
+        <div class="content-section">
+	        <h1 class="section-header"><i class="fa fa-mobile"></i> Contact</h1>
+	        <div class="row featurette about-me">
+	            <p>Email: aflanry@gmail.com</p>
+	        </div>
+        </div>
+    </div>
+    <script>
+	    navbar = $('.navbar-color');
+	    function determineNavPosition() {
+		    console.log(true);
+	        winHeight = $(window).height();
+	        navHeight = navbar.height(); 
+	        if ($(window).scrollTop() > (winHeight - navHeight)) {
+	        	navbar.addClass('navbar-fixed-top');
+	        	navbar.removeClass('floating');
+	        } else {
+	        	navbar.removeClass('navbar-fixed-top');
+	        	navbar.addClass('floating');
+	        }
+	    }
+	    determineNavPosition();
+	    $(window).scroll(determineNavPosition);
+    </script>
   </body>
 </html>
