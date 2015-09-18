@@ -72,17 +72,17 @@ function getJSONOlympicData(dataJSON)
     
     d3.select("thead").selectAll("th")
         .data(headerTable)
-        .enter().append("th").text(function(d){return d});
+        .enter().append("th").text(function(d){return d;});
 
     //Build Table
     //Build Rows
     var tr = d3.select("tbody").selectAll("tr")
-        .data(tableData).enter().append("tr")
+        .data(tableData).enter().append("tr");
  
     //Populate Cells
     tr.selectAll("td")
-        .data(function(d){return d3.values(d)})
+        .data(function(d){return d3.values(d);})
         .enter().append("td")
-        .text(function(d) {return d})  
+        .text(function(d) {return d;});
 }
    

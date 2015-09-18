@@ -1,6 +1,7 @@
 var seconds = 0;
 var timer;
 var timerUI = ".timer";
+var display;
 
 function startTimer() {
 	timer = setInterval(update, 1000);

@@ -107,7 +107,7 @@ function getJSONOlympicData(dataJSON)
         });
 */
    
-    g.data(pieData)
+    g.data(pieData);
     //tooltip on hover 
     g.on("mouseover", function(d) {
         div.style("width", "200px");
@@ -121,7 +121,7 @@ function getJSONOlympicData(dataJSON)
       .on("mouseout", function(d) {       
         div.transition()        
             .duration(500)      
-            .style("opacity", 0)}) 
+            .style("opacity", 0);});
     //build list of athletes on click
     g.on("click", function(d) {
         var listOfAthletes = [];
@@ -141,6 +141,6 @@ function getJSONOlympicData(dataJSON)
                     + "  | Bronze Medals: " + d.bronzemedals);
                 })
                 .attr("id", "myNode")
-                .style("text-indent", "50px")
+                .style("text-indent", "50px");
         });
 }

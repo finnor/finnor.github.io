@@ -26,7 +26,7 @@ function Solver(game) {
 						//Test for uniqueness
 						for(var k=0; k<this.moves.length; k++) {
 							iteratedMove = this.moves[k];
-							if(iteratedMove.x==tempMove.x && iteratedMove.y==tempMove.y && iteratedMove.type==tempMove.type) {
+							if(iteratedMove.x===tempMove.x && iteratedMove.y===tempMove.y && iteratedMove.type===tempMove.type) {
 								doAdd = false;
 							}
 						}
@@ -45,11 +45,11 @@ function Solver(game) {
 		if (game.isEdge(i, j)) {
 			var flagCountVerified = game.getNeighboringFlagCount(i, j, this.flagVerified);
 			var flagCount =  game.getNeighboringFlagCount(i, j, game.flag);
-			if (flagCountVerified==game.board[i][j] && game.edges[i][j]> flagCountVerified) {
+			if (flagCountVerified===game.board[i][j] && game.edges[i][j]> flagCountVerified) {
 				this.checkCorrectFlags(i, j);
 				move = new Move(i, j, "0", 0);
 				move.allClick(this.flagVerified, game.visible);
-			} else if (game.board[i][j]==game.edges[i][j] && game.edges[i][j]>flagCount) {
+			} else if (game.board[i][j]===game.edges[i][j] && game.edges[i][j]>flagCount) {
 				move = new Move(i, j, "1", 1);
 				move.allMine(game.flag, game.visible);
 			} else {
@@ -87,9 +87,9 @@ function Solver(game) {
 			for (var j=y-radius, s=0; j<=y+radius; j++, s++) {
 				if (i<=0 || i>=game.board.length-1 || j<=0 || j>=game.board[i].length-1) 
 					area[r][s] = "E";
-				else if (game.visible[i][j]==false)
+				else if (game.visible[i][j]===false)
 					area[r][s] = "?";
-				else if (this.flagVerified[i][j]==true)
+				else if (this.flagVerified[i][j]===true)
 					area[r][s] = "F";
 				else
 					area[r][s] = game.board[i][j];
@@ -108,9 +108,9 @@ function Solver(game) {
 			moveIfCorrect = this.patterns.patterns[key][i][1];
 			size = this.patterns.patterns[key][i][2];
 			
-			if (size==3)
+			if (size===3)
 				inputPattern = inputPattern3;
-			else if (size==5)
+			else if (size===5)
 				inputPattern = inputPattern5;
 			for (var j=0; j<4; j++) {
 				if (this.patterns.match(inputPattern, testPattern)) {
@@ -567,7 +567,7 @@ function Patterns() {
 			case " ":
 				result = true;
 			default:
-				if (input==patternSymbol)
+				if (input===patternSymbol)
 					result = true;
 				else
 					result = this.testNumber(patternSymbol);
@@ -602,7 +602,7 @@ function Patterns() {
 	};
 	
 	this.testFlag = function(patternSymbol) {	
-		if (patternSymbol=="F")
+		if (patternSymbol==="F")
 			return true;
 	};
 	

@@ -1,7 +1,7 @@
 /**
  * Generate a D3 pie chart with labels
  *
- * @param data = 
+ * @param params = 
  *               {"general": {
  *                    "width":,
  *                    "height":,
@@ -327,7 +327,7 @@ function generatePieChart(params) {
  * which was adpated from http://bl.ocks.org/msqr/3202712
  * 
  *
- * @param data = 
+ * @param params = 
  *               {
  *                "general": {
  *                    "size":,
@@ -677,4 +677,351 @@ function generateGauge(params) {
 	setInterval(function() {
 	    updateReadings();
 	}, 5 * 1000);
+}
+
+/**
+ * Class for creating a set of bar charts
+ * 
+ *
+ * @param data = 
+ *               {"general": {
+ *                    "size":,
+ *                    "marginTop":,
+ *                    "marginRight":,
+ *                    "marginLeft":,
+ *                    "marginBottom":,
+ *                    "chartLabelSize":,
+ *                    "tickLabelSize":,
+ *                    "chartWidth":,
+ *                    "chartHeight":,
+ *                    "element:",
+ *                    },
+ *                "charts": [
+ *                	  {
+ *                		  "name:",
+ *                        "xScaleType":, Not implemented yet
+ *                        "xScale":, Not implemented yet
+ *                        "yScaleType":,
+ *                        "yScale":,
+ *                        "data" {
+ *	                          "key":,
+ *    	                      "value":,
+ *      	              } 
+ *                    ]
+ *                }                      
+ *     
+ *  
+ * @return void
+ */
+function MultipleBarCharts(params) {
+	//Constants
+	var SIZE = params.general.size || 800;
+	var MARGINTOP = params.general.marginTop || SIZE/50;
+	var MARGINRIGHT = params.general.marginRight || SIZE/10;
+	var MARGINLEFT = params.general.marginLeft || SIZE/7;
+	var MARGINBOTTOM = params.general.marginBottom || SIZE/12;
+	var WIDTH = params.general.chartWidth || (SIZE - MARGINLEFT - MARGINRIGHT);
+	var HEIGHT = params.general.chartHeight || (SIZE/2 - MARGINTOP - MARGINBOTTOM);
+	var ELEMENT = params.general.element;
+	var CONTAINERWIDTH = $(ELEMENT).innerWidth();
+	var CENTERX = (CONTAINERWIDTH - WIDTH + MARGINLEFT)/2;
+	var CHARTLABELSIZE = params.general.chartLabelSize || SIZE/35;
+	var TICKLABELSIZE = params.general.tickLabelSize || SIZE/45;
+	
+	//individual chart parameters
+	var charts = params.charts;
+	
+	//self reference
+	var that = this;
+	
+	//Creates a set of toggle buttons to select chart
+	var radioToggles = d3.select(ELEMENT)
+	    .append('div')
+	        .append('div')
+	            .attr('class', 'btn-group')
+	            .attr('data-toggle', 'buttons');
+
+	var isFirst = true;
+	var firstIndex = "";
+	$.each(charts, function(index, value) {
+		radioToggles
+			.append('label')
+	            .attr('class', (isFirst) ? 'btn btn-primary active' : 'btn btn-primary')
+	            .text(value.name.toUpperCase())
+	            .on("click", function() { that.changeData(index); })
+	            .append('input')
+	                .attr('type', 'radio')
+	                .attr('name', 'options')
+	                .attr('autocomplete', 'off');
+		
+		if (isFirst)
+		   firstIndex = index;
+		isFirst = false;
+	});
+	
+	radioToggles
+		.append('label')
+	        .attr('class', 'btn btn-primary')
+	        .text("Show All")
+	        .on("click", function() { that.showAll(); })
+	        .append('input')
+	            .attr('type', 'radio')
+	            .attr('name', 'options')
+	            .attr('autocomplete', 'off');
+
+	
+	
+	var currentChart = ".chart-" + firstIndex;
+	var previousChart = ".chart-" + firstIndex;
+	
+	var chartingSection = d3.select(ELEMENT)
+	    .append('svg')
+	        .attr("class", "bar-chart-svg")
+	        .attr("width", CONTAINERWIDTH)
+	        .attr("height", HEIGHT + MARGINTOP + MARGINBOTTOM);
+	
+	
+	/*
+	 * Generates the first bar chart that is seen. Slightly different from other creation method
+	 * since this one grows on screen instead of sliding into view
+	 */
+	this.generateChart = function() {
+		
+		var chart = chartingSection
+		    .append("g")
+		        .attr("transform", "translate(" + CENTERX + "," + MARGINTOP + ")")
+		        .attr("class", "chart-" + firstIndex);
+		
+		var x = d3.scale.ordinal()
+			.domain(charts[firstIndex].data.map(function(d) { return d.key; }))
+		    .rangeBands([0, WIDTH], .1);
+		     
+		var y;
+		if (charts[firstIndex].yScaleType==="ordinal") {
+			y = d3.scale.ordinal()
+			    .domain([""].concat(charts[firstIndex].yScale))
+			    .rangePoints([HEIGHT, 0]);
+		} else if (charts[firstIndex].yScaleType==="linear") {
+			y = d3.scale.linear()
+			    .domain([0, d3.max(charts[firstIndex].data, function(d) { return d.value; })])
+			    .range([HEIGHT, 0]);
+		} else {
+			//could add other scales in the future
+		}
+		
+		var colorScale = d3.scale.category10();
+		
+		var xAxis = d3.svg.axis()
+			.scale(x)
+			.orient("bottom");
+		
+		var yAxis = d3.svg.axis()
+			.scale(y)
+		    .orient("left");
+		
+		chart.append("g")
+			.attr("class", "x-axis axis")
+			.attr("transform", "translate(0," + HEIGHT + ")")
+			.call(xAxis)
+			.attr("font-size", TICKLABELSIZE)
+			.append("text")
+			    .attr("class", "bar-chart-label")
+		        .attr("transform", "translate(" + WIDTH/2 + ", 0)")
+				.attr("y", MARGINBOTTOM - CHARTLABELSIZE)
+				.attr("dy", ".71em")
+				.style("text-anchor", "middle")
+				.attr("font-size", CHARTLABELSIZE)
+				.text(charts[firstIndex].xLabel);
+		
+		chart.append("g")
+		    .attr("class", "y-axis axis")
+		    .call(yAxis)
+		    .attr("font-size", TICKLABELSIZE)
+		    .append("text")
+		        .attr("class", "bar-chart-label")
+		        .attr("transform", "rotate(-90)")
+		        .attr("x", -HEIGHT/2)
+				.attr("y", -1*MARGINLEFT)
+				.attr("dy", ".71em")
+				.style("text-anchor", "middle")
+				.attr("font-size", CHARTLABELSIZE)
+				.text(charts[firstIndex].yLabel);
+		
+		var bars  = chart.selectAll(".bar")
+		    .data(charts[firstIndex].data);
+		
+		bars.enter()
+		   .append("rect")
+				.attr("class", "bar")
+		        .attr("x", function(d) { return x(d.key); })
+		        .attr("y", function(d) { return HEIGHT; })
+		        .attr("height", function(d) { return 0; })
+		        .attr("width", x.rangeBand())
+		        .attr("fill", function(d, i) {return colorScale(i);})
+			    .transition() 
+			        .ease("exp")
+			        .duration(2000)
+			        .attr("height", function(d) { return HEIGHT - y(d.value); })
+		            .attr("y", function(d) { return y(d.value); });
+	};
+	
+	/*
+	 * Moves the selected chart into focus and creates it if necessary
+	 * 
+	 * @param dataset - the chart that was selected
+	 */
+	this.changeData = function(dataset) {
+		that.hideNonSelected(dataset);
+		
+	    currentChart = ".chart-" + dataset;
+	    //if chart selected is NOT one currently shown
+		if (currentChart !== previousChart) {
+			//Move old chart out
+			chartingSection.select(previousChart)
+	            .transition()
+	                .duration(2000)
+	                .attr("transform", "translate(-" + CONTAINERWIDTH + ", " + MARGINTOP + ")");
+			
+			previousChart = currentChart;
+	
+			//if chart has already been created
+			if ($(currentChart).length) {
+				chartingSection.select(currentChart)
+	                .transition()
+	                    .duration(2000)
+	                    .attr("transform", "translate(" + CENTERX + ", " + MARGINTOP + ")");
+			//else create the chart and move it into focus
+			} else {
+				that.createNewChart(dataset, 0);
+			}
+		}
+	};
+	
+	/*
+	 * Creates a new chart offscreen and then slides it into focus
+	 * 
+	 * @param dataset - the chart to be created
+	 * @param numberDisplated - how many charts are going to be displayed at once
+	 */
+	this.createNewChart = function(dataset, numberDisplayed) {
+		var chartNew = chartingSection
+	        .append("g")
+	            .attr("transform", "translate(" + (CONTAINERWIDTH + MARGINLEFT) + "," + MARGINTOP  + ")")
+	            .attr("class", "chart-" + dataset);
+	
+	
+		var x = d3.scale.ordinal()
+	        .domain(charts[dataset].data.map(function(d) { return d.key; }))
+	        .rangeBands([0, WIDTH], .1);
+	             
+		var y;
+		if (charts[dataset].yScaleType==="ordinal") {
+			y = d3.scale.ordinal()
+			    .domain([""].concat(charts[dataset].yScale))
+			    .rangePoints([HEIGHT, 0]);
+		} else if (charts[dataset].yScaleType==="linear") {
+			y = d3.scale.linear()
+			    .domain([0, d3.max(charts[dataset].data, function(d) { return d.value; })])
+			    .range([HEIGHT, 0]);
+		} else {
+			//could add other scales in the future
+		}
+		
+	    
+	    var colorScale = d3.scale.category10();
+	    
+	    var xAxis = d3.svg.axis()
+	        .scale(x)
+	        .orient("bottom");
+	    
+	    var yAxis = d3.svg.axis()
+	        .scale(y)
+	        .orient("left");
+	    
+	    chartNew.append("g")
+	        .attr("class", "x-axis axis")
+	        .attr("transform", "translate(0," + HEIGHT + ")")
+	        .call(xAxis)
+	        .attr("font-size", TICKLABELSIZE)
+	        .append("text")
+	            .attr("class", "bar-chart-label")
+	            .attr("transform", "translate(" + WIDTH/2 + ", 0)")
+	            .attr("y", MARGINBOTTOM - CHARTLABELSIZE)
+	            .attr("dy", ".71em")
+	            .style("text-anchor", "middle")
+	            .attr("font-size", CHARTLABELSIZE)
+	            .text(charts[dataset].xLabel);
+	    
+	    chartNew.append("g")
+	        .attr("class", "y-axis axis")
+	        .call(yAxis)
+	        .attr("font-size", TICKLABELSIZE)
+	        .append("text")
+	            .attr("class", "bar-chart-label")
+	            .attr("transform", "rotate(-90)")
+	            .attr("x", -HEIGHT/2)
+	            .attr("y", -1*MARGINLEFT)
+	            .attr("dy", ".71em")
+	            .style("text-anchor", "middle")
+	            .attr("font-size", CHARTLABELSIZE)
+	            .text(charts[dataset].yLabel);
+	
+	    var bars  = chartNew.selectAll(".bar")
+	        .data(charts[dataset].data);
+	    bars.enter()
+	       .append("rect")
+	            .attr("class", "bar")
+	            .attr("x", function(d) { return x(d.key); })
+	            .attr("height", function(d) { return HEIGHT - y(d.value); })
+	            .attr("y", function(d) { return y(d.value); })
+	            .attr("width", x.rangeBand())
+	            .attr("fill", function(d, i) {return colorScale(i);});
+		
+	    
+	    chartNew.transition()
+	        .duration(2000)
+	        .attr("transform", "translate(" + CENTERX + ", " + (MARGINTOP*(numberDisplayed+1)+(MARGINBOTTOM+HEIGHT)*numberDisplayed) + ")");
+	};
+	
+	/*
+	 * Hides the charts that arent selected
+	 * 
+	 * @param dataset - the chart selected
+	 */
+	this.hideNonSelected = function(dataset) {
+		chartingSection
+        	.attr("height", HEIGHT + MARGINTOP + MARGINBOTTOM);
+		
+		$.each(charts, function(index, value) {
+			if($(".chart-" + index).length) {
+				if (index===dataset)
+					chartingSection.select(".chart-" + index).transition()
+			        	.duration(2000)
+			        	.attr("transform", "translate(" + CENTERX + ", " + MARGINTOP + ")");
+				else {
+					chartingSection.select(".chart-" + index).transition()
+			                .duration(2000)
+			                .attr("transform", "translate(-" + CONTAINERWIDTH + ", " + MARGINTOP + ")");
+				}
+			}
+		});
+	};
+	
+	/*
+	 * Expands the section and moves all charts into view, creates charts if necessary
+	 */
+	this.showAll = function() {
+		chartingSection
+	        .attr("height", (HEIGHT + MARGINTOP + MARGINBOTTOM)*charts.length);
+		
+		$.each(charts, function(index, value) {
+			if($(".chart-" + index).length) {
+				d3.select(".chart-" + index).transition()
+		        	.duration(2000)
+		        	.attr("transform", "translate(" + CENTERX + ", " + (MARGINTOP*(index+1)+(MARGINBOTTOM+HEIGHT)*index) + ")");
+			} else {
+				that.createNewChart(index, index);
+			}
+		});
+	};
 }

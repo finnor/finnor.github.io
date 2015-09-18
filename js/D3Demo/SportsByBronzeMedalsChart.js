@@ -107,7 +107,7 @@ function getJSONOlympicData(dataJSON)
         .on("mouseout", function(d) {       
             div.transition()        
                 .duration(500)      
-                .style("opacity", 0)}) 
+                .style("opacity", 0);}) 
     //builds list on click
         .on("click", function(d, i) {
             var listOfAthletes = [];
@@ -132,7 +132,7 @@ function getJSONOlympicData(dataJSON)
                             + "  | Bronze Medals: " + d.bronzemedals);
                     })
                 .attr("id", "myNode")
-                .style("text-indent", PADDINGLEFT + "px")
+                .style("text-indent", PADDINGLEFT + "px");
         });
             
    
@@ -154,7 +154,7 @@ function getJSONOlympicData(dataJSON)
             .attr("dy", ".35em")
             .attr("transform", "rotate(90)")
             .style("text-anchor", "start")
-            .attr("font-size", "15px")
+            .attr("font-size", "15px");
    
    
    

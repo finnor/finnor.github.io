@@ -156,13 +156,13 @@
 		                 ]
 		         };
 	        
-	        var paramsGauge = {
-	        	    "general" : {
-	        	    	"size": chartWidth,
-	        	    	"element": "#efficiency-gauge",
-	        	    	"chartTitle": "Work Productivity",
-	        	    }
-	        }
+		        var paramsGauge = {
+		        	    "general" : {
+		        	    	"size": chartWidth,
+		        	    	"element": "#efficiency-gauge",
+		        	    	"chartTitle": "Work Productivity",
+		        	    }
+		        }
 	        
 		        function goToOP() {
 	        		window.open("http://na.op.gg/summoner/userName=Finnor", "_blank");
@@ -221,9 +221,137 @@
         
         <div class="content-section">
             <h1 class="section-header"><i class="fa fa-laptop"></i> Skills</h1>
-            <div class="row featurette">
-                TBA
-            </div>
+                <div id="skills-chart" class="metric-charts">
+
+                </div>
+                
+                <style>
+					
+					.axis path,
+					.axis line {
+					  fill: none;
+					  stroke: #000;
+					  shape-rendering: crispEdges;
+					  color: #55bb55;
+					}
+                </style>
+                <script>
+                
+	                if (windowWidth<=480)
+	                    SIZE = 300;
+	                else if (windowWidth<=800)
+	                    SIZE = 600;
+	                else
+	                    SIZE = 1000;
+                
+                    var dataLanguage = [
+                        {key: "Javascript", value: "Proficient"},
+                        {key: "C#", value: "Proficient"},
+                        {key: "Java", value: "Adept"},
+                        {key: "PHP", value: "Adept"},
+                    ];
+                    
+                    var dataDB = [
+	                    {key: "MySql", value: "Adept"},
+	                    {key: "SQL Server", value: "Familiar"},
+	                    {key: "SQLite", value: "Proficient"},
+	                ]; 
+                    
+                    var dataTool = [
+	                    {key: "Git", value: "Adept"},
+	                    {key: "Gulp", value: "Proficient"},
+	                    {key: "Composer", value: "Proficient"},
+	                ]; 
+                    
+                    var dataFramework = [
+                        {key: "D3.js", value: "Adept"},
+                        {key: "Jquery", value: "Proficient"},
+                        {key: "PHPUnit", value: "Proficient"},
+                        {key: "Laravel", value: "Adept"},
+                        {key: "CakePHP", value: "Proficient"},
+                        {key: "Bootstrap", value: "Expert"},
+                    ];
+                    
+                    var dataOS = [
+                        {key: "Windows", value: "Proficient"},
+                        {key: "Linux", value: "Proficient"},
+                    ];
+                    
+                    var dataServer = [
+                        {key: "nginx", value: "Proficient"},
+                        {key: "Apache", value: "Novice"},
+                        {key: "Node.js", value: "Familiar"},
+                        {key: "IIS", value: "Familiar"},
+                    ];
+                    
+                    var chartsParams = [
+	                    {
+	                    	name: 'language',
+	                        xScaleType: 'ordinal',
+		                   	yScaleType: 'ordinal',
+	                        yScale: ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+	                        data: dataLanguage,
+	                        xLabel: "Skill",
+	                        yLabel: "Mastery"
+	                    },
+	                    {
+                            name: 'framework/lib',
+                            xScaleType: 'ordinal',
+                            yScaleType: 'ordinal',
+                            yScale: ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+                            data: dataFramework,
+                            xLabel: "Skill",
+                            yLabel: "Mastery"
+                        },
+                        {
+                            name: 'database',
+                            xScaleType: 'ordinal',
+                            yScaleType: 'ordinal',
+                            yScale: ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+                            data: dataDB,
+                            xLabel: "Skill",
+                            yLabel: "Mastery"
+                        },
+                        {
+                            name: 'tool',
+                            xScaleType: 'ordinal',
+                            yScaleType: 'ordinal',
+                            yScale: ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+                            data: dataTool,
+                            xLabel: "Skill",
+                            yLabel: "Mastery"
+                        },
+                        {
+                            name: 'OS',
+                            xScaleType: 'ordinal',
+                            yScaleType: 'ordinal',
+                            yScale: ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+                            data: dataOS,
+                            xLabel: "Skill",
+                            yLabel: "Mastery"
+                        },
+                        {
+                            name: 'server',
+                            xScaleType: 'ordinal',
+                            yScaleType: 'ordinal',
+                            yScale: ["Novice", "Familiar", "Proficient", "Adept"],
+                            data: dataServer,
+                            xLabel: "Skill",
+                            yLabel: "Mastery"
+                        },
+                    ];
+   
+                    var params = {
+                    		general: {
+                    			size: SIZE,
+                    			element: "#skills-chart",
+                    		},
+                            charts: chartsParams
+                    }
+                    
+                    var multibar = new MultipleBarCharts(params);
+                    multibar.generateChart();
+                </script>
         </div>
         
         <br />

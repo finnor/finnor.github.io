@@ -12,7 +12,7 @@ var movesPosition = -1;
 $(".move-btn").click(function() {
 	movesPosition++;
 	var move = solver.moves[movesPosition];
-	if (movesPosition>0 && move==null) {
+	if (movesPosition>0 && move===null) {
 		movesPosition = -1;
 	} else if (move!=null) {
 		$(".move").text("(" + move.x + ", " + move.y + ") " + move.message);
@@ -66,7 +66,7 @@ function Game(x, y, mines) {
 	    			flag[x-1][y+1] + flag[x][y+1] + flag[x+1][y+1];
 	    
 	    return flagCount;
-	}
+	};
 	
 	this.createEdgesBoard = function () {
 		this.edges = [];
@@ -83,25 +83,25 @@ function Game(x, y, mines) {
 				var visibleCount = 0;
 				//At each cell, count visible neighbors
 				//Edge cases - corners
-				if (i==1 && j==1) 
+				if (i===1 && j===1) 
 					visibleCount = !game.visible[i+1][j] + !game.visible[i][j+1] + !game.visible[i+1][j+1];
-				else if (i==game.x && j==1)
+				else if (i===game.x && j===1)
 					visibleCount = !game.visible[i-1][j] + !game.visible[i][j+1] + !game.visible[i-1][j+1];
-				else if (i==1 && j==game.y)
+				else if (i===1 && j===game.y)
 					visibleCount = !game.visible[i+1][j] + !game.visible[i][j-1] + !game.visible[i+1][j-1];
-				else if (i==game.x && j==game.y)
+				else if (i===game.x && j===game.y)
 					visibleCount = !game.visible[i-1][j] + !game.visible[i][j-1] + !game.visible[i-1][j-1];
 				//Edges but not corners
-				else if (i==1)
+				else if (i===1)
 					visibleCount =  !game.visible[i][j-1] + !game.visible[i+1][j-1] +
 						!game.visible[i+1][j] + !game.visible[i][j+1] + !game.visible[i+1][j+1];
-				else if (i==game.x)
+				else if (i===game.x)
 					visibleCount =  !game.visible[i][j-1] + !game.visible[i-1][j-1] +
 						!game.visible[i-1][j] + !game.visible[i][j+1] + !game.visible[i-1][j+1];
-				else if (j==1)
+				else if (j===1)
 					visibleCount =  !game.visible[i][j+1] + !game.visible[i+1][j+1] +
 						!game.visible[i+1][j] + !game.visible[i-1][j+1] + !game.visible[i-1][j];
-				else if (j==game.y)
+				else if (j===game.y)
 					visibleCount =  !game.visible[i][j-1] + !game.visible[i+1][j-1] +
 						!game.visible[i+1][j] + !game.visible[i-1][j-1] + !game.visible[i-1][j];
 				//Else add all neighbors
@@ -113,25 +113,25 @@ function Game(x, y, mines) {
 			    this.edges[i][j] = visibleCount;
 			}
 		}
-	}
+	};
 	
 	this.isEdge = function (x, y) {
-		if (this.visible[x][y]==true && this.edges[x][y]>0)
+		if (this.visible[x][y]===true && this.edges[x][y]>0)
 			return true;
 		else
 			return false;
-	}
+	};
 	
 	this.updateEdges = function(x, y) {
 		for(var i=x-1; i<=x+1; i++) {
 			for(var j=y-1; j<=y+1; j++) {
-				if (!(i==x && j==y)) {
+				if (!(i===x && j===y)) {
 					if (this.board[i][j]<10)
 						this.edges[i][j]--;
 				}
 			}
 		}
-	}
+	};
 }
 
 /**
@@ -208,9 +208,9 @@ function createInitialBoardUI(x, y) {
 	//Create event for right+left click -- clear neighbors
 	$(".cell-btn").mousedown(function(e) {
 		singleClick = true;
-		if( e.button == 2 )
+		if( e.button === 2 )
 			rightDown = true;
-		if (e.button == 0)
+		if (e.button === 0)
 			leftDown = true;
 		
 		//Can only right+left click on cells that are visible
@@ -218,7 +218,7 @@ function createInitialBoardUI(x, y) {
 			var x = parseInt(this.getAttribute('data-x'));
 			var y = parseInt(this.getAttribute('data-y'));
 			if (game.visible[x][y]) {
-				if (game.board[x][y] == game.getNeighboringFlagCount(x, y, game.flag)) {
+				if (game.board[x][y] === game.getNeighboringFlagCount(x, y, game.flag)) {
 					//Display what cells would be clicked on right+left click
 					showClickableNeighbors(x, y);
 				}
@@ -238,14 +238,14 @@ function createInitialBoardUI(x, y) {
 				//Remove css from the show clickable neighbors
 				$(".cell-btn").removeClass("rl-click");
 				var flagCount = game.getNeighboringFlagCount(x, y, game.flag);
-				if (flagCount==game.board[x][y]) {
+				if (flagCount===game.board[x][y]) {
 					clearNeighbors(x, y);
 				}
 			}
 		}
-		if( e.button == 2 )
+		if( e.button === 2 )
 			rightDown = false;
-		if (e.button == 0)
+		if (e.button === 0)
 			leftDown = false;
 	});
 }
@@ -259,7 +259,7 @@ function createInitialBoardUI(x, y) {
  */
 function createFirstGame(x, y, mines) {
 	game = generateBoard(x, y, mines);
-	createInitialBoardUI(x, y)
+	createInitialBoardUI(x, y);
 }
 
 /**
@@ -416,8 +416,8 @@ function changeBoard(x, y) {
 function showClickableNeighbors(x, y) {
 	for (var i=x-1; i<=x+1; i++) {
 		for (var j=y-1; j<=y+1; j++) {
-			if (!(i==x && j==y)) {
-				if (game.flag[i][j]==false && game.visible[i][j]==false) {
+			if (!(i===x && j===y)) {
+				if (game.flag[i][j]===false && game.visible[i][j]===false) {
 					var cell = $("#btn" + i + "-" + j);
 					cell.addClass("rl-click");
 				}
@@ -436,9 +436,9 @@ function showClickableNeighbors(x, y) {
 function clearNeighbors(x, y) {
 	for (var i=x-1; i<=x+1; i++) {
 		for (var j=y-1; j<=y+1; j++) {
-			if (!(i==x && j==y)) {
+			if (!(i===x && j===y)) {
 				if (i!=0 && i!=(game.board.length-1) && j!=0 && j!=(game.board[0].length-1)) {
-					if (game.flag[i][j]==false && game.visible[i][j]==false) {
+					if (game.flag[i][j]===false && game.visible[i][j]===false) {
 						var cell = $("#btn" + i + "-" + j);
 						click(i, j, cell);
 					}
@@ -480,7 +480,7 @@ function gameMechanics(value, x, y) {
 	switch (value) {
 		//Mine
 		case "X":
-			if (game.over==false) {
+			if (game.over===false) {
 				game.over=true;
 				gameOver(x, y);
 			}
@@ -496,7 +496,7 @@ function gameMechanics(value, x, y) {
 			break;
 	}
 	
-	if (game.squaresLeft==0)
+	if (game.squaresLeft===0)
 		gameWon();
 }
 
@@ -541,7 +541,7 @@ function resolveCellOutput(value, cell) {
 	      break;
 	    default:
 	      value = "X";
-	      if (game.over==true)
+	      if (game.over===true)
 	    	  cell.addClass("mine");
 	      else
 	    	  cell.addClass("mine-cause");
@@ -568,11 +568,11 @@ function explode(x, y) {
 		game.updateEdges(x, y);
 	    var value = resolveCellOutput(game.board[x][y], cell);
 	    
-	    if (game.board[x][y]==0) {
+	    if (game.board[x][y]===0) {
 	    	for (var i=x-1; i<=x+1; i++) {
 	    		for (var j=y-1; j<=y+1; j++) {
 	    			if (i!=0 && i!=(game.board.length-1) && j!=0 && j!=(game.board[0].length-1)) {
-	    				if (game.visible[i][j]==false) {
+	    				if (game.visible[i][j]===false) {
 	    					game.visible[i][j] = true;
 	    					explode(i, j);
 	    				}
@@ -595,7 +595,7 @@ function gameOver(x, y) {
 	
 	for (var i=1; i<game.board.length-1; i++) {
 		for (var j=1; j<game.board[i].length-1; j++) {
-			if (!(x==i && y==j)) {
+			if (!(x===i && y===j)) {
 				cell = $("#btn" + i + "-" + j);
 				cell.addClass("disabled");
 				value = resolveCellOutput(game.board[i][j], cell);

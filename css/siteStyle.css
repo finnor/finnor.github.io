@@ -3,7 +3,7 @@ body {
 }
 
 .index-body {
-    padding-top: 0px;
+    padding-top: 0;
 	font-size: 18px;
 	background-color: #223366;
 }
@@ -43,7 +43,7 @@ body {
     color: #FFFFFF;
 }
 .navbar-color .navbar-nav > .active > a, .navbar-color .navbar-nav > .open > a {
-    background: transparent linear-gradient(to bottom, #333355 0%, #1B2952 100%) repeat scroll 0% 0%;
+    background: transparent linear-gradient(to bottom, #333355 0, #1B2952 100%) repeat scroll 0 0;
 }
 
 /*Navbar toggle*/
