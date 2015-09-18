@@ -746,7 +746,7 @@ function MultipleBarCharts(params) {
 	$.each(charts, function(index, value) {
 		radioToggles
 			.append('label')
-	            .attr('class', (isFirst) ? 'btn btn-primary active' : 'btn btn-primary')
+	            .attr('class', (isFirst) ? 'btn btn-purplish active' : 'btn btn-purplish')
 	            .text(value.name.toUpperCase())
 	            .on("click", function() { that.changeData(index); })
 	            .append('input')
@@ -761,7 +761,7 @@ function MultipleBarCharts(params) {
 	
 	radioToggles
 		.append('label')
-	        .attr('class', 'btn btn-primary')
+	        .attr('class', 'btn btn-purplish')
 	        .text("Show All")
 	        .on("click", function() { that.showAll(); })
 	        .append('input')

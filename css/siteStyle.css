@@ -193,3 +193,26 @@ body {
 .main {
 	padding-top: 50px;
 }
+
+.btn-purplish.active, .btn-purplish:active {
+	background-color: #3D3D5C;
+    border-color: #232334;
+}
+
+.btn-purplish:focus, .btn-purplish:hover {
+	background-color: #3D3D5C;
+    background-position: 0px -15px;
+}
+
+.btn-purplish.active, .btn-purplish.focus, .btn-purplish:active, .btn-purplish:focus, .btn-purplish:hover, .open > .dropdown-toggle.btn-purplish {
+    color: #FFF;
+}
+
+.btn-purplish {
+	color: #FFF;
+    background-image: linear-gradient(to bottom, #666699 0px, #3D3D5C 100%);
+    background-repeat: repeat-x;
+    border-color: #31314A;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.15) inset, 0px 1px 1px rgba(0, 0, 0, 0.075);
+}
