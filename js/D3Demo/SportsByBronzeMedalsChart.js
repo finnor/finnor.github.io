@@ -100,7 +100,7 @@ function getJSONOlympicData(dataJSON)
             div.transition()        
                 .duration(200)      
                 .style("opacity", .9);      
-            div .html("Bronze Medals: <br/>"  + d)  
+            div .html("<p>Bronze Medals: "  + d + "</p>")  
                 .style("left", (d3.event.pageX) + "px")     
                 .style("top", (d3.event.pageY - 28) + "px");    
             })                  
@@ -111,7 +111,7 @@ function getJSONOlympicData(dataJSON)
     //builds list on click
         .on("click", function(d, i) {
             var listOfAthletes = [];
-            d3.selectAll("#myNode").remove();
+            d3.selectAll(".list tr").remove();
             for(var j=0;j<dataJSON.length;j++){
                 if (dataJSON[j].sport===sports[i])
                 {
@@ -119,20 +119,24 @@ function getJSONOlympicData(dataJSON)
                         listOfAthletes[listOfAthletes.length] = dataJSON[j]; 
                 }
             }
-            d3.select("list").data(listOfAthletes).enter().append("p")
-                .text(function (d)
-                    {
-                        return ("Name: " + d.athlete 
-                            + " | Age: " + d.age 
-                            + " | Country: " + d.country 
-                            + " | Year: " + d.year 
-                            + " | Sport: " + d.sport 
-                            + "  | Gold Medals: " + d.goldmedals
-                            + "  | Silver Medals: " + d.silvermedals
-                            + "  | Bronze Medals: " + d.bronzemedals);
-                    })
-                .attr("id", "myNode")
-                .style("text-indent", PADDINGLEFT + "px");
+            
+            d3.select('.list thead').selectAll("th")
+	        	.data(["Name", "Age", "Country", "Year", "Sport", "Gold Medals", "Silver Medals", "Bronze Medals"])
+	        	.enter().append("th")
+	        		.text(function (d) {
+	        			return d;
+	        		});
+	 
+	        
+		    var row = d3.select('.list tbody').selectAll("tr").data(listOfAthletes)
+	        	.enter().append("tr");
+	        
+	        row.selectAll("td")
+		        .data(function(d){return d3.values(d);})
+		        .enter().append("td")
+			        .text(function(d) {
+				        	return d;
+			        	});
         });
             
    

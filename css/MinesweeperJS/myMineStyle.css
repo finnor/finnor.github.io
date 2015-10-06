@@ -1,9 +1,12 @@
 .game {
-	width: 750px;
+	width: 850px;
+	padding: 0 50px;
+	background: linear-gradient(#D7D7DF, #8E9AB0);
+	border: 3px solid #7D7E80;
 }
 
 .center {
-  margin: 18px auto 10px auto;
+  margin: 10px auto 10px auto;
   text-align: center;
 }
 
