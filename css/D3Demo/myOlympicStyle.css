@@ -1,7 +1,3 @@
-.list {
-	margin-top: 50px;
-}
-
 @media (min-width: 980px) {
     body {
         padding-top: 60px;
@@ -17,10 +13,6 @@
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
 }
 
 .tooltip {  

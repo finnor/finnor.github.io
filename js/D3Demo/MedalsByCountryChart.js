@@ -123,28 +123,37 @@ function getJSONOlympicData(dataJSON)
             .style("opacity", 0);});
     //build list of athletes on click
     g.on("click", function(d) {
-        var listOfAthletes = [];
-        d3.selectAll(".list tr").remove();
-        for(var j=0;j<dataJSON.length;j++) {
-            if (dataJSON[j].country===d.country)
-                    listOfAthletes[listOfAthletes.length] = dataJSON[j]; 
-        }
-        d3.select('.list thead').selectAll("th")
-        	.data(["Name", "Age", "Country", "Year", "Sport", "Gold Medals", "Silver Medals", "Bronze Medals"])
-        	.enter().append("th")
-        		.text(function (d) {
-        			return d;
-        		});
- 
-        
-	    var row = d3.select('.list tbody').selectAll("tr").data(listOfAthletes)
-        	.enter().append("tr");
-        
-        row.selectAll("td")
-	        .data(function(d){return d3.values(d);})
-	        .enter().append("td")
-		        .text(function(d) {
-			        	return d;
-		        	});
+    	//Fade out table
+    	$(".list table")
+    		.fadeOut("slow", function () { 
+    			
+    	        var listOfAthletes = [];
+    	        d3.selectAll(".list tr").remove();
+    	        for(var j=0;j<dataJSON.length;j++) {
+    	            if (dataJSON[j].country===d.country)
+    	                    listOfAthletes[listOfAthletes.length] = dataJSON[j]; 
+    	        }
+    	        d3.select('.list thead').selectAll("th")
+    	        	.data(["Name", "Age", "Country", "Year", "Sport", "Gold Medals", "Silver Medals", "Bronze Medals"])
+    	        	.enter().append("th")
+    	        		.text(function (d) {
+    	        			return d;
+    	        		});
+    	 
+    	        
+    		    var row = d3.select('.list tbody').selectAll("tr").data(listOfAthletes)
+    	        	.enter().append("tr");
+    	        
+    	        row.selectAll("td")
+    		        .data(function(d){return d3.values(d);})
+    		        .enter().append("td")
+    			        .text(function(d) {
+    				        	return d;
+    			        	});
+    	        
+    	        //Fade in table
+    	    	$(".list table")
+    	    		.fadeIn("slow");
+    		});
     });
 }

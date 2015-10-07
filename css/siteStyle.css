@@ -11,9 +11,9 @@ body {
 .content-section {
 	padding: 30px 0;
     border-left: 3px solid #66aa77;
-    border-top: 3px solid #66aa77;
+    border-top: 1px solid #66aa77;
     border-right: 1px solid #66aa77;
-    border-bottom: 1px solid #66aa77;
+    border-bottom: 5px solid #66aa77;
 	background-color: #FFF;
 	margin-bottom: 75px;
 }
@@ -104,9 +104,18 @@ body {
     letter-spacing: -1px;
 }
 
-.timeline-entry, .content-guts {
-	margin: 0 30px;
+.content-guts {
+    margin: 0 30px;
 }
+
+.timeline-entry {
+	padding: 30px 0;
+	margin: 0 30px 30px;
+	box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.05);
+	border: 1px solid #DDD;
+}
+
+
 .timeline-title {
 	font-weight: bold;
 	font-size: 21px;

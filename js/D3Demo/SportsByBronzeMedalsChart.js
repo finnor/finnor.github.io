@@ -17,6 +17,9 @@ function getJSONOlympicData(dataJSON)
     //y-axis data
     var bronzeMedals = [];   
     
+    //color scale
+    var color = d3.scale.category20();
+    
     var numberOfSports = 0; 
     var athlete;
     var sport;
@@ -79,22 +82,19 @@ function getJSONOlympicData(dataJSON)
    
    
     //Draw the bars.
-    chartArea.append("rect").attr("x", function(d, i)
-            {
-                return i * DRAWXDISTANCE + PADDINGLEFT + BARMARGIN;
-            })
-        .attr("y", function(d)
-            {   
+    chartArea.append("rect").attr("x", function(d, i){
+        	return i * DRAWXDISTANCE + PADDINGLEFT + BARMARGIN;
+        })
+        .attr("y", function(d) {   
                 return GRAPHHEIGHT + PADDINGTOP - (d * BARYMULT);
-            })
-        .attr("width", function(d)
-            {
+        })
+        .attr("width", function(d) {
                 return BARWIDTH;
-            })
-        .attr("height", function(d)
-            {
+        })
+        .attr("height", function(d){
                 return d * BARYMULT;
-            })
+        })
+        .attr("fill", function(d, i) {return color(i);})
     //tooltip on hover        
         .on("mouseover", function(d) {      
             div.transition()        
@@ -103,47 +103,56 @@ function getJSONOlympicData(dataJSON)
             div .html("<p>Bronze Medals: "  + d + "</p>")  
                 .style("left", (d3.event.pageX) + "px")     
                 .style("top", (d3.event.pageY - 28) + "px");    
-            })                  
+        })                  
         .on("mouseout", function(d) {       
             div.transition()        
                 .duration(500)      
-                .style("opacity", 0);}) 
+                .style("opacity", 0);
+        }) 
     //builds list on click
         .on("click", function(d, i) {
-            var listOfAthletes = [];
-            d3.selectAll(".list tr").remove();
-            for(var j=0;j<dataJSON.length;j++){
-                if (dataJSON[j].sport===sports[i])
-                {
-                    if (dataJSON[j].bronzemedals>0)
-                        listOfAthletes[listOfAthletes.length] = dataJSON[j]; 
-                }
-            }
-            
-            d3.select('.list thead').selectAll("th")
-	        	.data(["Name", "Age", "Country", "Year", "Sport", "Gold Medals", "Silver Medals", "Bronze Medals"])
-	        	.enter().append("th")
-	        		.text(function (d) {
-	        			return d;
-	        		});
-	 
-	        
-		    var row = d3.select('.list tbody').selectAll("tr").data(listOfAthletes)
-	        	.enter().append("tr");
-	        
-	        row.selectAll("td")
-		        .data(function(d){return d3.values(d);})
-		        .enter().append("td")
-			        .text(function(d) {
-				        	return d;
+        	//Fade out table
+        	$(".list table")
+        		.fadeOut("slow", function () { 
+	            var listOfAthletes = [];
+	            d3.selectAll(".list tr").remove();
+	            for(var j=0;j<dataJSON.length;j++){
+	                if (dataJSON[j].sport===sports[i])
+	                {
+	                    if (dataJSON[j].bronzemedals>0)
+	                        listOfAthletes[listOfAthletes.length] = dataJSON[j]; 
+	                }
+	            }
+	            
+	            d3.select('.list thead').selectAll("th")
+		        	.data(["Name", "Age", "Country", "Year", "Sport", "Gold Medals", "Silver Medals", "Bronze Medals"])
+		        	.enter().append("th")
+		        		.text(function (d) {
+		        			return d;
+		        		});
+		 
+		        
+			    var row = d3.select('.list tbody').selectAll("tr").data(listOfAthletes)
+		        	.enter().append("tr");
+		        
+		        row.selectAll("td")
+			        .data(function(d){return d3.values(d);})
+			        .enter().append("td")
+				        .text(function(d) {
+					        	return d;
 			        	});
+		        
+		      //Fade in table
+    	    	$(".list table")
+    	    		.fadeIn("slow");
+    		});
         });
             
    
    //build x-axis ticks and labels
     var x = d3.scale.ordinal()
         .domain(sports)
-        .rangeBands([PADDINGLEFT + 3, ENDOFGRAPH]);
+        .rangeBands([PADDINGLEFT, ENDOFGRAPH], .1);
 
     var xAxis = d3.svg.axis()
         .scale(x);
