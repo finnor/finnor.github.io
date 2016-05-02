@@ -18,8 +18,16 @@
     <link href="css/siteStyle.css" rel="stylesheet">
     
     
-    
     <!-- Scripts -->
+    <script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		
+		ga('create', 'UA-77250701-1', 'auto');
+		ga('send', 'pageview');
+	</script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
@@ -49,7 +57,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="DNAAlignment/">DNAAlignmentXY</a>
                     <li><a href="MinesweeperJS/">MinesweeperJS</a></li>
-                    <li><a href="D3Demo/">D3Demo</a></li>
+                    <li><a href="http://lolbar.me/">LoLbar</a></li>
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -92,7 +100,6 @@
 	            <p style="text-align: left">
 	               &nbsp;&nbsp;&nbsp;&nbsp;My name is Adrian Flannery. I am software developer based out of Birmingham, Alabama. 
 	               This is a space where I hope to showcase some of my talents.
-	               Things are a bit on the unfinished side still, but hopefully that changes soon.
 	            </p>
 	        </div>
         </div>
@@ -178,10 +185,10 @@
 	        <h1 class="section-header"><i class="fa fa-folder-open-o"></i> Project Snapshots</h1>
 	        <div class="row featurette">
 	            <div class="col-md-4">
-	                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+	                <a href="DNAAlignment/"><img class="featurette-image img-responsive center-block" src="images/DNAAlignmentXY_sample.jpg" alt="DNAAlignmentXY"></a>
 	            </div>
 	            <div class="col-md-8">
-	                <h2 class="featurette-heading">DNA Alignment XY</h2>
+	                <h2 class="featurette-heading"><a href="DNAAlignment/">DNA Alignment XY</a></h2>
 	                <p class="lead text-muted">In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local 
 	                    and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. 
 	                    <a href="DNAAlignment/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
@@ -191,7 +198,7 @@
 	        <hr class="featurette-divider">
 	        <div class="row featurette">
 	            <div class="col-md-4">
-	                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+	                <a href="MinesweeperJS/"><img class="featurette-image img-responsive center-block" src="images/minesweeperjs_sample.jpg" alt="MinesweeperJS"></a>
 	            </div>
 	            <div class="col-md-8">
 	                <h2 class="featurette-heading"><a href="MinesweeperJS/">MinesweeperJS</a></h2>
@@ -203,12 +210,14 @@
 	        <hr class="featurette-divider">
 	        <div class="row featurette">
 	            <div class="col-md-4">
-	                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+	                <a href="http://lolbar.me/"><img class="featurette-image img-responsive center-block" src="images/lolbar_sample.jpg" alt="LoLbar"></a>
 	            </div>
 	            <div class="col-md-8">
-	                <h2 class="featurette-heading"><a href="D3Demo/">D3 Demo</a></h2>
-	                <p class="lead text-muted">This is a small demo of some of the capabilities of D3.js. 
-	                    <a href="D3Demo/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
+	                <h2 class="featurette-heading"><a href="http://lolbar.me/">LoLbar</a></h2>
+	                <p class="lead text-muted">League of Legends is the most popular game in the world! 
+	                	LoLbar is a single page match history viewer that uses AngularJS to show data from Riot API
+	                	on a players recent performance in addition to summaries on play. 
+	                    <a href="http://lolbar.me/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
 	                </p>
 	            </div>
 	        </div>
@@ -248,7 +257,8 @@
                     
                     var dataDB = [
 	                    {key: "MySql", value: "Adept"},
-	                    {key: "SQL Server", value: "Familiar"},
+	                    {key: "MariaDB", value: "Adept"},
+	                    {key: "PostgreSQL", value: "Proficient"},
 	                    {key: "SQLite", value: "Proficient"},
 	                ]; 
                     
@@ -259,6 +269,7 @@
 	                ]; 
                     
                     var dataFramework = [
+						{key: "Angular", value: "Proficient"},
                         {key: "D3.js", value: "Adept"},
                         {key: "Jquery", value: "Proficient"},
                         {key: "PHPUnit", value: "Proficient"},
@@ -276,7 +287,7 @@
                         {key: "nginx", value: "Proficient"},
                         {key: "Apache", value: "Novice"},
                         {key: "Node.js", value: "Familiar"},
-                        {key: "IIS", value: "Familiar"},
+                        {key: "IIS", value: "Novice"},
                     ];
                     
                     var chartsParams = [
@@ -352,13 +363,17 @@
         <div class="content-section">
 	        <h1 class="section-header"><i class="fa fa-building"></i> Employment</h1>
 	        <div class="row timeline-entry">
+	        	<p class="timeline-title">Informatics Analyst I</p>
 	            <div class="col-md-8">
-	                <p class="timeline-title">Informatics Analyst I</p>
 	                <ul>
-	                    <li>TBA</li>
+	                	<li>Assist in the design, development and implementation of new computer programs including enterprise-level web applications and systems.</li>
+						<li>Utilize modern HTML5+Javascript centered web computing, software development methodologies and object-oriented development methodologies to develop software applications and database systems (relational and NoSQL).</li> 
+						<li>Provide support using automated testing processes and version control systems.</li> 
+						<li>Provide support for the analysis, design, estimation, development, documentation, testing, and implementation of new applications.</li> 
+						<li>Provide maintenance and support for programs within existing systems.</li>
 	                </ul>
 	            </div>
-	            <div class="col-md-4">
+	            <div class="col-md-4 timeline-summary">
 	                <p>Nov 2014 - Present</p>
 		            <p>University of Alabama at Birmingham</p>
 		            <p>Department of Pathology - Division of Informatics</p>
@@ -369,25 +384,53 @@
         <div class="content-section">
 	        <h1 class="section-header"><i class="fa fa-graduation-cap"></i> Education</h1>
 	        <div class="row timeline-entry">
+	        	<p class="timeline-title">BS - Molecular Biology - In Progress</p>
 	            <div class="col-md-8">
-	                <p class="timeline-title">MSSE - Software Engineering</p>
 	                <ul>
-	                    <li>TBA</li>
+	                	<li>Genetics</li>
+	                	<li>Microbiology</li>
+	                	<li>Biochemistry</li>
 	                </ul>
 	            </div>
-	            <div class="col-md-4">
+	            <div class="col-md-4 timeline-summary">
+	                <p>Spring 2016 - Present</p>
+	                <p>University of Alabama at Birmingham</p>
+	            </div>
+	        </div>
+	        <div class="row timeline-entry">
+	        	<p class="timeline-title">MSSE - Software Engineering</p>
+	            <div class="col-md-8">
+	                <ul>
+	                	<li>Advanced Software Engineering Principles and Application</li>
+	                	<li>Advanced Security</li>
+	                	<li>Advanced Operating Systems</li>
+	                	<li>Advanced Algorithm Analysis</li>
+	                	<li>Software Testing</li>
+	                	<li>Statistics</li>
+	                    <li>Image Analysis/Processing</li>
+	                    <li>Modeling and Simulation</li>
+	                    <li>Client/Server Architectures</li>
+	                    
+	                </ul>
+	            </div>
+	            <div class="col-md-4 timeline-summary">
 	                <p>Fall 2011 - Spring 2013</p>
 	                <p>University of Alabama at Huntsville</p>
 	            </div>
 	        </div>
 	        <div class="row timeline-entry">
+	        	<p class="timeline-title">BS - Computer and Information Science</p>
 	            <div class="col-md-8">
-	                <p class="timeline-title">BS - Computer and Information Science</p>
 	                <ul>
-	                    <li>TBA</li>
+	                	<li>Bioinformatics</li>
+	                	<li>Security</li>
+	                	<li>Networking</li>
+	                    <li>Language/Automata Theory</li>
+	                    <li>Operating Systems</li>
+	                    <li>Algorithm Analysis</li>
 	                </ul>
 	            </div>
-	            <div class="col-md-4">
+	            <div class="col-md-4 timeline-summary">
 	                <p>Fall 2005 - Spring 2011</p>
 	                <p>University of Alabama at Birmingham</p>
 	            </div>
@@ -397,7 +440,7 @@
         <div class="content-section">
 	        <h1 class="section-header"><i class="fa fa-mobile"></i> Contact</h1>
 	        <div class="row featurette about-me">
-	            <p>Email: aflanry@gmail.com</p>
+	            <p>Email: aflannery@uabmc.edu</p>
 	        </div>
         </div>
     </div>

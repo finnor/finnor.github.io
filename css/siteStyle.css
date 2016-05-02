@@ -1,6 +1,7 @@
 body {
 	padding-top: 50px;
     background-color: #223366;
+    overflow-x: hidden;
 }
 
 .index-body {
@@ -119,6 +120,7 @@ body {
 .timeline-title {
 	font-weight: bold;
 	font-size: 21px;
+	margin-left: 20px;
 }
 
 .small-chart {
@@ -191,7 +193,7 @@ body {
 .welcome {
 	min-width: 320px;
 	height:100vh;
-	background-image: url("../images/aurora.png");
+	background-image: url("../images/aurora.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -215,6 +217,9 @@ body {
 .btn-purplish:focus, .btn-purplish:hover {
 	background-color: #3D3D5C;
     background-position: 0px -15px;
+}
+.timeline-summary {
+    border-left: 3px solid #DDD;
 }
 
 .btn-purplish.active, .btn-purplish.focus, .btn-purplish:active, .btn-purplish:focus, .btn-purplish:hover, .open > .dropdown-toggle.btn-purplish {
