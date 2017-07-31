@@ -12,35 +12,35 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <!--  Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    
-    
+
+
     <!-- Custom CSS -->
     <link href="css/siteStyle.css" rel="stylesheet">
-    
-    
+
+
     <!-- Scripts -->
     <script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-		
-		ga('create', 'UA-77250701-1', 'auto');
-		ga('send', 'pageview');
-	</script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77250701-1', 'auto');
+        ga('send', 'pageview');
+    </script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-    
-    
+
+
     <!-- My scripts -->
     <script src="js/chart_creator.js"></script>
   </head>
 
   <body class="index-body">
-  
-   
-    
+
+
+
     <!-- Navbar -->
     <nav class="navbar navbar-default navbar-color">
         <div class="container">
@@ -52,27 +52,27 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">Adrian Flannery</a>
-            </div>  
+            </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="DNAAlignment/">DNAAlignmentXY</a>
                     <li><a href="MinesweeperJS/">MinesweeperJS</a></li>
-                    <li><a href="http://lolbar.me/">LoLbar</a></li>
+                    <li><a href="SpectrumToRGB">SpectrumToRGB</a></li>
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-    
+
     <script>
         var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
         if (iOS)
-        	$('.navbar').addClass('navbar-fixed-top');
+            $('.navbar').addClass('navbar-fixed-top');
         else {
             navbar = $('.navbar');
             function determineNavPosition() {
                 winHeight = $(window).height();
-                navHeight = navbar.height(); 
+                navHeight = navbar.height();
                 if ($(window).scrollTop() > (winHeight - navHeight)) {
                     navbar.addClass('navbar-fixed-top');
                     navbar.removeClass('floating');
@@ -85,142 +85,126 @@
             $(window).scroll(determineNavPosition);
         }
     </script>
-    
+
     <div class="welcome">
         <div class="welcome-message">
             <span>You found me! Welcome!  <i class="fa fa-hand-spock-o"></i>
             </span>
         </div>
     </div>
-    
+
     <div class="container main">
         <div class="content-section">
-	        <h1 class="section-header"><i class="fa fa-user"></i> About Me</h1>
-	        <div class="row featurette about-me">
-	            <p style="text-align: left">
-	               &nbsp;&nbsp;&nbsp;&nbsp;My name is Adrian Flannery. I am software developer based out of Birmingham, Alabama. 
-	               This is a space where I hope to showcase some of my talents.
-	            </p>
-	        </div>
+            <h1 class="section-header"><i class="fa fa-user"></i> About Me</h1>
+            <div class="row featurette about-me">
+                <p style="text-align: left">
+                   &nbsp;&nbsp;&nbsp;&nbsp;My name is Adrian Flannery. I am software developer based out of Birmingham, Alabama.
+                   This is a space where I hope to showcase some of my talents.
+                </p>
+            </div>
         </div>
         <div class="content-section">
-	        <h1 class="section-header"><i class="fa fa-pie-chart"></i>Metrics</h1>
-	        <div class="row featurette metric-charts">
-	            <span id="efficiency-gauge" class="gauge small-chart col-md-6"></span>
-	            <span id="hobby-chart" class="small-chart col-md-6"></span>
-	        </div>
-	        <script>
-	            var windowWidth = $(window).width();
-	            var chartWidth = 200;
-	            if (windowWidth<=480)
-	            	chartWidth = 200;
-	            else if (windowWidth<=800)
-	            	chartWidth = 300;
-	            else
-	            	chartWidth = 400;
-	            	
-		        /**
-		
-		         *                "data": {
-		         *                    "label":,
-		         *                    "value":,
-		         *                    "link":,
-		         *                    "linkParam1":,
-		         *                    "linkParam2":
-		         */
-		        var paramsPie = {
-		                 "general": {
-		                     "width": chartWidth,
-		                     "element": "#hobby-chart",
-		                     "isPercent": true,
-		                     "chartLabel": "Outside Work",
-		                 },
-		                 "data": [
-	                         {
-			                     "label":"LoL",
-			                     "value": 30,
-			                     "link": "goToOP",
-	                         },
-	                         {
-	                             "label":"Education",
-	                             "value": 30,
-	                         },
-	                         {
-	                             "label":"Coding",
-	                             "value": 30,
-	                         },
-	                         {
-	                        	 "label":"Life",
-	                             "value": 1,
-	                         },
-	                         {
-	                        	 "label":"Netflix",
-	                             "value": 10,
-	                         },
-	                         {
-	                             "label":"Exercise",
-	                             "value": 20,
-	                         },
-		                 ]
-		         };
-	        
-		        var paramsGauge = {
-		        	    "general" : {
-		        	    	"size": chartWidth,
-		        	    	"element": "#efficiency-gauge",
-		        	    	"chartTitle": "Work Productivity",
-		        	    }
-		        }
-	        
-		        function goToOP() {
-	        		window.open("http://na.op.gg/summoner/userName=Finnor", "_blank");
-	        	}
-		        
-		        generatePieChart(paramsPie); 
-		        generateGauge(paramsGauge);
-	        </script>
+            <h1 class="section-header"><i class="fa fa-pie-chart"></i>Metrics</h1>
+            <div class="row featurette metric-charts">
+                <span id="efficiency-gauge" class="gauge small-chart col-md-6"></span>
+                <span id="hobby-chart" class="small-chart col-md-6"></span>
+            </div>
+            <script>
+                var windowWidth = $(window).width();
+                var chartWidth = 200;
+                if (windowWidth<=480)
+                    chartWidth = 200;
+                else if (windowWidth<=800)
+                    chartWidth = 300;
+                else
+                    chartWidth = 400;
+
+                var paramsPie = {
+                         "general": {
+                             "width": chartWidth,
+                             "element": "#hobby-chart",
+                             "isPercent": true,
+                             "chartLabel": "Outside Work",
+                         },
+                         "data": [
+                             {
+                                 "label":"Reading",
+                                 "value": 30,
+                             },
+                             {
+                                 "label":"Education",
+                                 "value": 30,
+                             },
+                             {
+                                 "label":"Coding",
+                                 "value": 30,
+                             },
+                             {
+                                 "label":"Life",
+                                 "value": 1,
+                             },
+                             {
+                                 "label":"Netflix",
+                                 "value": 10,
+                             },
+                             {
+                                 "label":"Exercise",
+                                 "value": 20,
+                             },
+                         ]
+                 };
+
+                var paramsGauge = {
+                        "general" : {
+                            "size": chartWidth,
+                            "element": "#efficiency-gauge",
+                            "chartTitle": "Work Productivity",
+                        }
+                }
+
+                generatePieChart(paramsPie);
+                generateGauge(paramsGauge);
+            </script>
         </div>
 
         <div class="content-section">
-	        <h1 class="section-header"><i class="fa fa-folder-open-o"></i> Project Snapshots</h1>
-	        <div class="row featurette">
-	            <div class="col-md-4">
-	                <a href="DNAAlignment/"><img class="featurette-image img-responsive center-block" src="images/DNAAlignmentXY_sample.jpg" alt="DNAAlignmentXY"></a>
-	            </div>
-	            <div class="col-md-8">
-	                <h2 class="featurette-heading"><a href="DNAAlignment/">DNA Alignment XY</a></h2>
-	                <p class="lead text-muted">In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local 
-	                    and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. 
-	                    <a href="DNAAlignment/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
-	                </p>
-	            </div>
-	        </div>
-	        <hr class="featurette-divider">
-	        <div class="row featurette">
-	            <div class="col-md-4">
-	                <a href="MinesweeperJS/"><img class="featurette-image img-responsive center-block" src="images/minesweeperjs_sample.jpg" alt="MinesweeperJS"></a>
-	            </div>
-	            <div class="col-md-8">
-	                <h2 class="featurette-heading"><a href="MinesweeperJS/">MinesweeperJS</a></h2>
-	                <p class="lead text-muted">An early iteration of a project to help illustrate strategies in solving Minesweeper. 
-	                    <a href="MinesweeperJS/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
-	                </p>
-	            </div>
-	        </div>
-	        <hr class="featurette-divider">
-	        <div class="row featurette">
-	            <div class="col-md-4">
-	                <a href="http://lolbar.me/"><img class="featurette-image img-responsive center-block" src="images/lolbar_sample.jpg" alt="LoLbar"></a>
-	            </div>
-	            <div class="col-md-8">
-	                <h2 class="featurette-heading"><a href="http://lolbar.me/">LoLbar</a></h2>
-	                <p class="lead text-muted">League of Legends is the most popular game in the world! 
-	                	LoLbar is a single page match history viewer that uses AngularJS to show data from Riot API
-	                	on a players recent performance in addition to summaries on play. 
-	                    <a href="http://lolbar.me/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
-	                </p>
-	            </div>
-	        </div>
+            <h1 class="section-header"><i class="fa fa-folder-open-o"></i> Project Snapshots</h1>
+            <div class="row featurette">
+                <div class="col-md-4">
+                    <a href="DNAAlignment/"><img class="featurette-image img-responsive center-block" src="images/DNAAlignmentXY_sample.jpg" alt="DNAAlignmentXY"></a>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="featurette-heading"><a href="DNAAlignment/">DNA Alignment XY</a></h2>
+                    <p class="lead text-muted">In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local
+                        and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. Requires Silverlight.
+                        <a href="DNAAlignment/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
+                    </p>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="row featurette">
+                <div class="col-md-4">
+                    <a href="MinesweeperJS/"><img class="featurette-image img-responsive center-block" src="images/minesweeperjs_sample.jpg" alt="MinesweeperJS"></a>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="featurette-heading"><a href="MinesweeperJS/">MinesweeperJS</a></h2>
+                    <p class="lead text-muted">An early iteration of a project to help illustrate strategies in solving Minesweeper.
+                        <a href="MinesweeperJS/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
+                    </p>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="row featurette">
+                <div class="col-md-4">
+                    <a href="SpectrumToRGB"><img class="featurette-image img-responsive center-block" src="images/SpectrumToRGB_sample.jpg" alt="SpectrumToRGB"></a>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="featurette-heading"><a href="SpectrumToRGB/">SpectrumToRGB</a></h2>
+                    <p class="lead text-muted">Have you ever wondered what a pigment looks like if you purified a macroscopic amount? SpectrumToRGB takes an input absorbance or reflectance spectrum and approximates the color in RGB space.
+                        <a href="SpectrumToRGB/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="content-section">
@@ -228,48 +212,48 @@
                 <div id="skills-chart" class="metric-charts">
 
                 </div>
-                
+
                 <style>
-					
-					.axis path,
-					.axis line {
-					  fill: none;
-					  stroke: #000;
-					  shape-rendering: crispEdges;
-					  color: #55bb55;
-					}
+
+                    .axis path,
+                    .axis line {
+                      fill: none;
+                      stroke: #000;
+                      shape-rendering: crispEdges;
+                      color: #55bb55;
+                    }
                 </style>
                 <script>
-                
-	                if (windowWidth<=480)
-	                    SIZE = 300;
-	                else if (windowWidth<=800)
-	                    SIZE = 600;
-	                else
-	                    SIZE = 1000;
-                
+
+                    if (windowWidth<=480)
+                        SIZE = 300;
+                    else if (windowWidth<=800)
+                        SIZE = 600;
+                    else
+                        SIZE = 1000;
+
                     var dataLanguage = [
                         {key: "Javascript", value: "Proficient"},
                         {key: "C#", value: "Proficient"},
-                        {key: "Java", value: "Adept"},
+                        {key: "Java", value: "Proficient"},
                         {key: "PHP", value: "Adept"},
                     ];
-                    
+
                     var dataDB = [
-	                    {key: "MySql", value: "Adept"},
-	                    {key: "MariaDB", value: "Adept"},
-	                    {key: "PostgreSQL", value: "Proficient"},
-	                    {key: "SQLite", value: "Proficient"},
-	                ]; 
-                    
+                        {key: "MySql", value: "Adept"},
+                        {key: "MariaDB", value: "Adept"},
+                        {key: "PostgreSQL", value: "Proficient"},
+                        {key: "SQLite", value: "Proficient"},
+                    ];
+
                     var dataTool = [
-	                    {key: "Git", value: "Adept"},
-	                    {key: "Gulp", value: "Proficient"},
-	                    {key: "Composer", value: "Proficient"},
-	                ]; 
-                    
+                        {key: "Git", value: "Proficient"},
+                        {key: "Gulp", value: "Proficient"},
+                        {key: "Composer", value: "Proficient"},
+                    ];
+
                     var dataFramework = [
-						{key: "Angular", value: "Proficient"},
+                        {key: "Angular", value: "Proficient"},
                         {key: "D3.js", value: "Adept"},
                         {key: "Jquery", value: "Proficient"},
                         {key: "PHPUnit", value: "Proficient"},
@@ -277,30 +261,30 @@
                         {key: "CakePHP", value: "Proficient"},
                         {key: "Bootstrap", value: "Adept"},
                     ];
-                    
+
                     var dataOS = [
                         {key: "Windows", value: "Proficient"},
                         {key: "Linux", value: "Proficient"},
                     ];
-                    
+
                     var dataServer = [
                         {key: "nginx", value: "Proficient"},
                         {key: "Apache", value: "Novice"},
                         {key: "Node.js", value: "Familiar"},
                         {key: "IIS", value: "Novice"},
                     ];
-                    
+
                     var chartsParams = [
-	                    {
-	                    	name: 'language',
-	                        xScaleType: 'ordinal',
-		                   	yScaleType: 'ordinal',
-	                        yScale: ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
-	                        data: dataLanguage,
-	                        xLabel: "Skill",
-	                        yLabel: "Mastery"
-	                    },
-	                    {
+                        {
+                            name: 'language',
+                            xScaleType: 'ordinal',
+                            yScaleType: 'ordinal',
+                            yScale: ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+                            data: dataLanguage,
+                            xLabel: "Skill",
+                            yLabel: "Mastery"
+                        },
+                        {
                             name: 'framework/lib',
                             xScaleType: 'ordinal',
                             yScaleType: 'ordinal',
@@ -346,102 +330,104 @@
                             yLabel: "Mastery"
                         },
                     ];
-   
+
                     var params = {
-                    		general: {
-                    			size: SIZE,
-                    			element: "#skills-chart",
-                    		},
+                            general: {
+                                size: SIZE,
+                                element: "#skills-chart",
+                            },
                             charts: chartsParams
                     }
-                    
+
                     var multibar = new MultipleBarCharts(params);
                     multibar.generateChart();
                 </script>
         </div>
 
         <div class="content-section">
-	        <h1 class="section-header"><i class="fa fa-building"></i> Employment</h1>
-	        <div class="row timeline-entry">
-	        	<p class="timeline-title">Informatics Analyst I</p>
-	            <div class="col-md-8">
-	                <ul>
-	                	<li>Assist in the design, development and implementation of new computer programs including enterprise-level web applications and systems.</li>
-						<li>Utilize modern HTML5+Javascript centered web computing, software development methodologies and object-oriented development methodologies to develop software applications and database systems (relational and NoSQL).</li> 
-						<li>Provide support using automated testing processes and version control systems.</li> 
-						<li>Provide support for the analysis, design, estimation, development, documentation, testing, and implementation of new applications.</li> 
-						<li>Provide maintenance and support for programs within existing systems.</li>
-	                </ul>
-	            </div>
-	            <div class="col-md-4 timeline-summary">
-	                <p>Nov 2014 - Present</p>
-		            <p>University of Alabama at Birmingham</p>
-		            <p>Department of Pathology - Division of Informatics</p>
-	            </div>
-	        </div>
+            <h1 class="section-header"><i class="fa fa-building"></i> Employment</h1>
+            <div class="row timeline-entry">
+                <p class="timeline-title">Informatics Analyst I</p>
+                <div class="col-md-8">
+                    <ul>
+                        <li>Assist in the design, development and implementation of new computer programs including enterprise-level web applications and systems.</li>
+                        <li>Utilize modern HTML5+Javascript centered web computing, software development methodologies and object-oriented development methodologies to develop software applications and database systems (relational and NoSQL).</li>
+                        <li>Provide support using automated testing processes and version control systems.</li>
+                        <li>Provide support for the analysis, design, estimation, development, documentation, testing, and implementation of new applications.</li>
+                        <li>Provide maintenance and support for programs within existing systems.</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 timeline-summary">
+                    <p>Nov 2014 - Present</p>
+                    <p>University of Alabama at Birmingham</p>
+                    <p>Department of Pathology - Division of Informatics</p>
+                </div>
+            </div>
         </div>
 
         <div class="content-section">
-	        <h1 class="section-header"><i class="fa fa-graduation-cap"></i> Education</h1>
-	        <div class="row timeline-entry">
-	        	<p class="timeline-title">BS - Molecular Biology - In Progress</p>
-	            <div class="col-md-8">
-	                <ul>
-	                	<li>Genetics</li>
-	                	<li>Microbiology</li>
-	                	<li>Biochemistry</li>
-	                </ul>
-	            </div>
-	            <div class="col-md-4 timeline-summary">
-	                <p>Spring 2016 - Present</p>
-	                <p>University of Alabama at Birmingham</p>
-	            </div>
-	        </div>
-	        <div class="row timeline-entry">
-	        	<p class="timeline-title">MSSE - Software Engineering</p>
-	            <div class="col-md-8">
-	                <ul>
-	                	<li>Advanced Software Engineering Principles and Application</li>
-	                	<li>Advanced Security</li>
-	                	<li>Advanced Operating Systems</li>
-	                	<li>Advanced Algorithm Analysis</li>
-	                	<li>Software Testing</li>
-	                	<li>Statistics</li>
-	                    <li>Image Analysis/Processing</li>
-	                    <li>Modeling and Simulation</li>
-	                    <li>Client/Server Architectures</li>
-	                    
-	                </ul>
-	            </div>
-	            <div class="col-md-4 timeline-summary">
-	                <p>Fall 2011 - Spring 2013</p>
-	                <p>University of Alabama at Huntsville</p>
-	            </div>
-	        </div>
-	        <div class="row timeline-entry">
-	        	<p class="timeline-title">BS - Computer and Information Science</p>
-	            <div class="col-md-8">
-	                <ul>
-	                	<li>Bioinformatics</li>
-	                	<li>Security</li>
-	                	<li>Networking</li>
-	                    <li>Language/Automata Theory</li>
-	                    <li>Operating Systems</li>
-	                    <li>Algorithm Analysis</li>
-	                </ul>
-	            </div>
-	            <div class="col-md-4 timeline-summary">
-	                <p>Fall 2005 - Spring 2011</p>
-	                <p>University of Alabama at Birmingham</p>
-	            </div>
-	        </div>
+            <h1 class="section-header"><i class="fa fa-graduation-cap"></i> Education</h1>
+            <div class="row timeline-entry">
+                <p class="timeline-title">BS - Biology - In Progress</p>
+                <div class="col-md-8">
+                    <ul>
+                        <li>DNA Technology</li>
+                        <li>Molecular Genetics</li>
+                        <li>Genetics</li>
+                        <li>Microbiology</li>
+                        <li>Biochemistry</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 timeline-summary">
+                    <p>Spring 2016 - Present</p>
+                    <p>University of Alabama at Birmingham</p>
+                </div>
+            </div>
+            <div class="row timeline-entry">
+                <p class="timeline-title">MSSE - Software Engineering</p>
+                <div class="col-md-8">
+                    <ul>
+                        <li>Advanced Software Engineering Principles and Application</li>
+                        <li>Advanced Security</li>
+                        <li>Advanced Operating Systems</li>
+                        <li>Advanced Algorithm Analysis</li>
+                        <li>Software Testing</li>
+                        <li>Statistics</li>
+                        <li>Image Analysis/Processing</li>
+                        <li>Modeling and Simulation</li>
+                        <li>Client/Server Architectures</li>
+
+                    </ul>
+                </div>
+                <div class="col-md-4 timeline-summary">
+                    <p>Fall 2011 - Spring 2013</p>
+                    <p>University of Alabama at Huntsville</p>
+                </div>
+            </div>
+            <div class="row timeline-entry">
+                <p class="timeline-title">BS - Computer and Information Science</p>
+                <div class="col-md-8">
+                    <ul>
+                        <li>Bioinformatics</li>
+                        <li>Security</li>
+                        <li>Networking</li>
+                        <li>Language/Automata Theory</li>
+                        <li>Operating Systems</li>
+                        <li>Algorithm Analysis</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 timeline-summary">
+                    <p>Fall 2005 - Spring 2011</p>
+                    <p>University of Alabama at Birmingham</p>
+                </div>
+            </div>
         </div>
 
         <div class="content-section">
-	        <h1 class="section-header"><i class="fa fa-mobile"></i> Contact</h1>
-	        <div class="row featurette about-me">
-	            <p>Email: aflannery@uabmc.edu</p>
-	        </div>
+            <h1 class="section-header"><i class="fa fa-mobile"></i> Contact</h1>
+            <div class="row featurette about-me">
+                <p>Email: aflannery@uabmc.edu</p>
+            </div>
         </div>
     </div>
   </body>
