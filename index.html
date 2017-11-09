@@ -129,19 +129,15 @@
                          "data": [
                              {
                                  "label":"Reading",
-                                 "value": 30,
+                                 "value": 25,
                              },
                              {
                                  "label":"Education",
-                                 "value": 30,
+                                 "value": 25,
                              },
                              {
                                  "label":"Coding",
-                                 "value": 30,
-                             },
-                             {
-                                 "label":"Life",
-                                 "value": 1,
+                                 "value": 20,
                              },
                              {
                                  "label":"Netflix",
@@ -175,7 +171,8 @@
                 </div>
                 <div class="col-md-8">
                     <h2 class="featurette-heading"><a href="DNAAlignment/">DNA Alignment XY</a></h2>
-                    <p class="lead text-muted">In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local
+                    <p class="lead text-muted">
+                        In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local
                         and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. Requires Silverlight.
                         <a href="DNAAlignment/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
                     </p>
@@ -188,7 +185,8 @@
                 </div>
                 <div class="col-md-8">
                     <h2 class="featurette-heading"><a href="MinesweeperJS/">MinesweeperJS</a></h2>
-                    <p class="lead text-muted">An early iteration of a project to help illustrate strategies in solving Minesweeper.
+                    <p class="lead text-muted">
+                        An early iteration of a project to help illustrate patterns used in solving Minesweeper.
                         <a href="MinesweeperJS/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
                     </p>
                 </div>
@@ -200,7 +198,8 @@
                 </div>
                 <div class="col-md-8">
                     <h2 class="featurette-heading"><a href="SpectrumToRGB/">SpectrumToRGB</a></h2>
-                    <p class="lead text-muted">Have you ever wondered what a pigment looks like if you purified a macroscopic amount? SpectrumToRGB takes an input absorbance or reflectance spectrum and approximates the color in RGB space.
+                    <p class="lead text-muted">
+                        Have you ever wondered what a pigment looks like if you purified a macroscopic amount? SpectrumToRGB takes an input absorbance or reflectance spectrum and approximates the color in RGB space.
                         <a href="SpectrumToRGB/" class="pull-right btn btn-default btn-md"><i class="fa fa-angle-double-right fa-lg"></i></a>
                     </p>
                 </div>
@@ -233,15 +232,15 @@
                         SIZE = 1000;
 
                     var dataLanguage = [
+                        {key: "PHP", value: "Adept"},
                         {key: "Javascript", value: "Proficient"},
                         {key: "C#", value: "Proficient"},
                         {key: "Java", value: "Proficient"},
-                        {key: "PHP", value: "Adept"},
                     ];
 
                     var dataDB = [
-                        {key: "MySql", value: "Adept"},
-                        {key: "MariaDB", value: "Adept"},
+                        {key: "MariaDB", value: "Proficient"},
+                        {key: "MySql", value: "Proficient"},
                         {key: "PostgreSQL", value: "Proficient"},
                         {key: "SQLite", value: "Proficient"},
                     ];
@@ -250,28 +249,22 @@
                         {key: "Git", value: "Proficient"},
                         {key: "Gulp", value: "Proficient"},
                         {key: "Composer", value: "Proficient"},
+                        {key: "npm", value: "Proficient"},
                     ];
 
                     var dataFramework = [
-                        {key: "Angular", value: "Proficient"},
-                        {key: "D3.js", value: "Adept"},
+                        {key: "AngularJS", value: "Proficient"},
+                        {key: "Vue.js", value: "Proficient"},
                         {key: "Jquery", value: "Proficient"},
-                        {key: "PHPUnit", value: "Proficient"},
+                        {key: "D3.js", value: "Adept"},
                         {key: "Laravel", value: "Adept"},
-                        {key: "CakePHP", value: "Proficient"},
+                        {key: "PHPUnit", value: "Proficient"},
                         {key: "Bootstrap", value: "Adept"},
                     ];
 
                     var dataOS = [
                         {key: "Windows", value: "Proficient"},
                         {key: "Linux", value: "Proficient"},
-                    ];
-
-                    var dataServer = [
-                        {key: "nginx", value: "Proficient"},
-                        {key: "Apache", value: "Novice"},
-                        {key: "Node.js", value: "Familiar"},
-                        {key: "IIS", value: "Novice"},
                     ];
 
                     var chartsParams = [
@@ -320,15 +313,6 @@
                             xLabel: "Skill",
                             yLabel: "Mastery"
                         },
-                        {
-                            name: 'server',
-                            xScaleType: 'ordinal',
-                            yScaleType: 'ordinal',
-                            yScale: ["Novice", "Familiar", "Proficient", "Adept"],
-                            data: dataServer,
-                            xLabel: "Skill",
-                            yLabel: "Mastery"
-                        },
                     ];
 
                     var params = {
@@ -347,18 +331,55 @@
         <div class="content-section">
             <h1 class="section-header"><i class="fa fa-building"></i> Employment</h1>
             <div class="row timeline-entry">
-                <p class="timeline-title">Informatics Analyst I</p>
+                <p class="timeline-title">Informatics Analyst II</p>
                 <div class="col-md-8">
                     <ul>
-                        <li>Assist in the design, development and implementation of new computer programs including enterprise-level web applications and systems.</li>
-                        <li>Utilize modern HTML5+Javascript centered web computing, software development methodologies and object-oriented development methodologies to develop software applications and database systems (relational and NoSQL).</li>
-                        <li>Provide support using automated testing processes and version control systems.</li>
-                        <li>Provide support for the analysis, design, estimation, development, documentation, testing, and implementation of new applications.</li>
-                        <li>Provide maintenance and support for programs within existing systems.</li>
+                        <li>
+                            Assist in the design, development and implementation of new computer programs including enterprise-level web applications and systems as a project section lead.
+                        </li>
+                        <li>
+                            Utilize modern HTML5+Javascript centered web computing, software development methodologies and object-oriented development methodologies to develop software applications and database systems (relational and NoSQL).
+                        </li>
+                        <li>
+                            Provide support using automated testing processes and version control systems.
+                        </li>
+                        <li>
+                            Provide support for the analysis, design, estimation, development, documentation, testing, and implementation of new applications.
+                        </li>
+                        <li>
+                            Provide maintenance and support for programs within existing systems.
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-4 timeline-summary">
-                    <p>Nov 2014 - Present</p>
+                    <p>November 2017 - Present</p>
+                    <p>University of Alabama at Birmingham</p>
+                    <p>Department of Pathology - Genomic Diagnostics &amp; Bioinformatics</p>
+                </div>
+            </div>
+            <div class="row timeline-entry">
+                <p class="timeline-title">Informatics Analyst I</p>
+                <div class="col-md-8">
+                    <ul>
+                        <li>
+                            Assist in the design, development and implementation of new computer programs including enterprise-level web applications and systems.
+                        </li>
+                        <li>
+                            Utilize modern HTML5+Javascript centered web computing, software development methodologies and object-oriented development methodologies to develop software applications and database systems (relational and NoSQL).
+                        </li>
+                        <li>
+                            Provide support using automated testing processes and version control systems.
+                        </li>
+                        <li>
+                            Provide support for the analysis, design, estimation, development, documentation, testing, and implementation of new applications.
+                        </li>
+                        <li>
+                            Provide maintenance and support for programs within existing systems.
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 timeline-summary">
+                    <p>November 2014 - October 2017</p>
                     <p>University of Alabama at Birmingham</p>
                     <p>Department of Pathology - Division of Informatics</p>
                 </div>
@@ -371,6 +392,7 @@
                 <p class="timeline-title">BS - Biology - In Progress</p>
                 <div class="col-md-8">
                     <ul>
+                        <li>Systems Biology</li>
                         <li>DNA Technology</li>
                         <li>Molecular Genetics</li>
                         <li>Genetics</li>
