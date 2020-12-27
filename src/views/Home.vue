@@ -13,8 +13,40 @@
     <div class="card">
       <h1 class="card-header text-center"><i class="fa fa-chart-pie"></i> Metrics</h1>
       <div class="card-body">
-        <span id="efficiency-gauge" class="gauge small-chart col-md-6"></span>
-        <span id="hobby-chart" class="small-chart col-md-6"></span>
+        <div class="row">
+          <div id="efficiency-gauge" class="gauge small-chart col-md-6"></div>
+          <donut-chart class="small-chart col-md-6"
+            :params="{
+              'general': {
+                'width': 500,
+                'isPercent': true,
+                'chartLabel': 'Outside Work',
+              },
+              'data': [
+                {
+                  'label':'Reading',
+                  'value': 30,
+                },
+                {
+                  'label':'Education',
+                  'value': 10,
+                },
+                {
+                  'label':'Coding',
+                  'value': 25,
+                },
+                {
+                  'label':'Netflix',
+                  'value': 15,
+                },
+                {
+                  'label':'Exercise',
+                  'value': 20,
+                }
+              ]
+            }"
+          ></donut-chart>
+        </div>
       </div>
     </div>
 
@@ -246,7 +278,11 @@
 </template>
 
 <script>
+import DonutChart from "@/components/DonutChart.vue";
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: { DonutChart }
 }
+  
 </script>
