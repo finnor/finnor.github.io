@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-user"></i> About Me</h1>
       <div class="card-body">
         <p>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-chart-pie"></i> Metrics</h1>
       <div class="card-body">
         <div class="row">
@@ -50,9 +50,9 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-folder-open"></i> Project Snapshots</h1>
-      <div class="card">
+      <div class="card border border-brand-secondary mb-5">
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-folder-open"></i> Other Projects</h1>
         <div class="card-body">
           <div class="row">
@@ -141,12 +141,12 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-laptop"></i> Skills</h1>
       <div id="skills-chart" class="metric-charts"></div>
     </div>
 
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-building"></i> Employment</h1>
       <div class="card-body">
         <div class="row">
@@ -206,7 +206,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-graduation-cap"></i> Education</h1>
       <div class="card-body">
         <div class="row">
@@ -268,7 +268,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card border border-brand-secondary mb-5">
       <h1 class="card-header text-center"><i class="fa fa-mobile"></i> Contact</h1>
       <div class="card-body">
         <p>Email: aflannery@uabmc.edu</p>

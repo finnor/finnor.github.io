@@ -1,0 +1,10 @@
+.bg-gradient-brand-primary {
+  background: transparent linear-gradient(to bottom, lighten($brand-primary, 15%) 0%, $brand-primary 100%) repeat scroll 0% 0%;
+}
+.nav-floating {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}

@@ -1,4 +1,7 @@
+$brand-primary: #223366;
+$brand-secondary: #66aa77;
+
 $theme-colors: (
-  "brand-primary": #223366,
-  "brand-secondary": #66aa77,
+  "brand-primary": $brand-primary,
+  "brand-secondary": $brand-secondary,
 ) !default;
