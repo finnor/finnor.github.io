@@ -1,0 +1,17 @@
+{
+  "good": [
+    "Things are going swell!"
+  ],
+  "hiccup": [
+    "I didn't even change anything?!?",
+    "Someone's birthday",
+    "It seemed superfluous at the time.",
+    "Compiling.",
+    "Running regression tests."
+  ],
+  "disaster": [
+    "Uh oh, cat got in the server!",
+    "Fondue day was a big mistake!",
+    "Cosmic ray?"
+  ]
+}

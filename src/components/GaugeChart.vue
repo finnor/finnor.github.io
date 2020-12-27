@@ -8,6 +8,7 @@
 
 <script>
 import * as d3 from "d3";
+import gaugeStatuses from "@/config/gaugeStatuses.json";
 
 export default {
   name: 'GaugeChart',
@@ -286,50 +287,22 @@ export default {
         //If Normal operation
         if (typeOfOutcome>.3) {
           outcome.efficiency = (Math.random()*11)+90;
-          outcome.status = getStatus(0);
+          outcome.status = getStatus("good");
         //Else if an small hiccup
         } else if (typeOfOutcome >.1){
           outcome.efficiency = (Math.random()*(HIGHTHRESHOLD-LOWTHRESHOLD)) + LOWTHRESHOLD;
-          outcome.status = getStatus(1);
+          outcome.status = getStatus("hiccup");
         //Else a disaster
         } else {
           outcome.efficiency = (Math.random()*LOWTHRESHOLD);
-          outcome.status = getStatus(2);
+          outcome.status = getStatus("disaster");
         }
         return outcome;
       }
 
-      let goodStatus = [
-        "Things are going swell!",
-      ];
-      let hiccupStatus = [
-        "I didn't even change anything?!?",
-        "Someone's birthday",
-        "It seemed superfluous at the time.",
-        "Compiling.",
-        "Running regression tests.",
-      ];
-      let disasterStatus = [
-        "Uh oh, cat got in the server!",
-        "Fondue day was a big mistake!",
-        "Cosmic ray?",
-      ];
       let getStatus = function(type) {
-        let statusIndexRand = Math.random();
-        let temp;
-        switch (type) {
-          case 0:
-            temp = Math.floor(statusIndexRand*goodStatus.length);
-            return (goodStatus[temp]);
-          case 1:
-            temp = Math.floor(statusIndexRand*hiccupStatus.length);
-            return (hiccupStatus[temp]);
-          case 2:
-            temp = Math.floor(statusIndexRand*disasterStatus.length);
-            return (disasterStatus[temp]);
-          default:
-            return null;
-        }
+        let randomIndex = Math.floor(Math.random()*gaugeStatuses[type].length);
+        return (gaugeStatuses[type][randomIndex]);
       }
 
       // every few seconds update reading values
