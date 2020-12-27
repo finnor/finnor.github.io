@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-brand-primary">
     <app-nav/>
     <router-view/>
     <app-footer/>

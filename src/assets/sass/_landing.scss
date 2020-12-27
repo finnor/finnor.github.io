@@ -1,0 +1,16 @@
+
+.welcome {
+  min-width: 320px;
+  height:100vh;
+  background-image: url("~@/assets/aurora.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .welcome-message {
+    padding-top: 30vh;
+    text-align: center;
+    font-size: 10vh;
+    color: #FFF;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+}
