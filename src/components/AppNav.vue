@@ -1,15 +1,17 @@
 <template>
   <b-navbar ref="navFloating" toggleable="lg" type="dark" variant="gradient-brand-primary" :sticky="!isFloating" :class="[(isFloating) ? 'nav-floating' : 'navbar-fixed-top']">
-    <b-navbar-brand href="#">NavBar</b-navbar-brand>
+    <div class="container">
+      <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
-        <b-nav-item to="/">Home</b-nav-item>
-        <b-nav-item to="/DNAAlignment">DNAAlignmentXY</b-nav-item>
-      </b-navbar-nav>
-    </b-collapse>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item to="/">Home</b-nav-item>
+          <b-nav-item to="/DNAAlignment">DNAAlignmentXY</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </div>
   </b-navbar>
 </template>
 

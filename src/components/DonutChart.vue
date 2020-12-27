@@ -1,20 +1,16 @@
 <template>
-  <div>
+  <div class="text-center">
+    <h3 v-if="params.general.chartLabel">{{params.general.chartLabel}}</h3>
     <svg :id="id"></svg>
-    <p class="chart-label" v-if="params.general.chartLabel">{{params.general.chartLabel}}</p>
   </div>
 </template>
-<style scoped>
-.chart-label {
-  text-align: center;
-  font-weight: bold;
-}
-</style>
+
 <script>
 import * as d3 from "d3";
 import {schemeCategory10} from "d3-scale-chromatic";
 
 export default {
+  name: 'DonutChart',
   data() {
     return {
       id: this.genId()

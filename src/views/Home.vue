@@ -21,8 +21,15 @@
         <h1 class="card-header text-center"><i class="fa fa-chart-pie"></i> Metrics</h1>
         <div class="card-body">
           <div class="row">
-            <div id="efficiency-gauge" class="gauge small-chart col-md-6"></div>
-            <donut-chart class="small-chart col-md-6"
+            <gauge-chart class="col-md-6"
+              :params="{
+                'general' : {
+                  'size': 400,
+                  'chartLabel': 'Work Productivity',
+                }
+              }"
+            ></gauge-chart>
+            <donut-chart class="col-md-6"
               :params="{
                 'general': {
                   'width': 500,
@@ -63,7 +70,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-4">
-                <a href="DNAAlignment/"><img class="img-fluid center-block" src="images/DNAAlignmentXY_sample.jpg" alt="DNAAlignmentXY"></a>
+                <a href="DNAAlignment/"><img class="img-fluid" src="@/assets/images/DNAAlignmentXY_sample.jpeg" alt="DNAAlignmentXY"></a>
               </div>
               <div class="col-md-8">
                 <h2 class="featurette-heading"><a href="DNAAlignment/">DNA Alignment XY</a></h2>
@@ -77,7 +84,7 @@
             <hr class="featurette-divider">
             <div class="row">
               <div class="col-md-4">
-                <a href="MinesweeperJS/"><img class="img-fluid center-block" src="images/minesweeperjs_sample.jpg" alt="MinesweeperJS"></a>
+                <a href="MinesweeperJS/"><img class="img-fluid" src="@/assets/images/minesweeperjs_sample.jpeg" alt="MinesweeperJS"></a>
               </div>
               <div class="col-md-8">
                 <h2 class="featurette-heading"><a href="MinesweeperJS/">MinesweeperJS</a></h2>
@@ -90,7 +97,7 @@
             <hr class="featurette-divider">
             <div class="row">
               <div class="col-md-4">
-                <a href="SpectrumToRGB"><img class="img-fluid center-block" src="images/SpectrumToRGB_sample.jpg" alt="SpectrumToRGB"></a>
+                <a href="SpectrumToRGB"><img class="img-fluid" src="@/assets/images/SpectrumToRGB_sample.jpeg" alt="SpectrumToRGB"></a>
               </div>
               <div class="col-md-8">
                 <h2 class="featurette-heading"><a href="SpectrumToRGB/">SpectrumToRGB</a></h2>
@@ -109,7 +116,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-4">
-                <a href="http://apps.cytoscape.org/apps/wkshelldecomposition" target="_blank"><img class="img-fluid center-block" src="http://apps.cytoscape.org/media/wkshelldecomposition/screenshots/Example%20Network%20Layout.png" alt="wk Shell Decomposition"></a>
+                <a href="http://apps.cytoscape.org/apps/wkshelldecomposition" target="_blank"><img class="img-fluid" src="http://apps.cytoscape.org/media/wkshelldecomposition/screenshots/Example%20Network%20Layout.png" alt="wk Shell Decomposition"></a>
               </div>
               <div class="col-md-8">
                 <h2 class="featurette-heading"><a href="http://apps.cytoscape.org/apps/wkshelldecomposition" target="_blank">wk Shell Decomposition</a></h2>
@@ -287,10 +294,11 @@
 
 <script>
 import DonutChart from "@/components/DonutChart.vue";
+import GaugeChart from '@/components/GaugeChart.vue';
 
 export default {
   name: 'Home',
-  components: { DonutChart }
+  components: { DonutChart, GaugeChart }
 }
   
 </script>
