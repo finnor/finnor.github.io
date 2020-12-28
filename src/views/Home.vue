@@ -167,7 +167,13 @@
 
       <div class="card border border-brand-secondary mb-5">
         <h1 class="card-header bg-white text-center"><i class="fa fa-laptop"></i> Skills</h1>
-        <div id="skills-chart" class="metric-charts"></div>
+        <div class="card-body">
+          <bar-chart-collection
+            :params="{
+              charts: jobSkills
+            }"
+          ></bar-chart-collection>
+        </div>
       </div>
 
       <div class="card border border-brand-secondary mb-5">
@@ -312,12 +318,19 @@
 </style>
 
 <script>
+import BarChartCollection from '@/components/BarChartCollection.vue';
 import DonutChart from "@/components/DonutChart.vue";
 import GaugeChart from '@/components/GaugeChart.vue';
+import jobSkills from "@/config/jobSkills.json";
 
 export default {
   name: 'Home',
-  components: { DonutChart, GaugeChart }
+  components: { BarChartCollection, DonutChart, GaugeChart },
+  data() {
+    return {
+      jobSkills: jobSkills
+    }
+  },
 }
   
 </script>

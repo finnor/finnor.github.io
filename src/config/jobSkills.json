@@ -1,0 +1,70 @@
+[
+  {
+      "name": "language",
+      "xScaleType": "ordinal",
+      "yScaleType": "ordinal",
+      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+      "data": [
+        {"key": "PHP", "value": "Adept"},
+        {"key": "Javascript", "value": "Proficient"},
+        {"key": "C#", "value": "Proficient"},
+        {"key": "Java", "value": "Proficient"},
+        {"key": "Python", "value": "Proficient"}
+      ],
+      "xLabel": "Skill",
+      "yLabel": "Mastery"
+  },
+  {
+      "name": "framework/lib",
+      "xScaleType": "ordinal",
+      "yScaleType": "ordinal",
+      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+      "data": [
+        {"key": "Vue.js", "value": "Adept"},
+        {"key": "D3.js", "value": "Proficient"},
+        {"key": "Laravel", "value": "Adept"},
+        {"key": "Bootstrap", "value": "Adept"}
+      ],
+      "xLabel": "Skill",
+      "yLabel": "Mastery"
+  },
+  {
+      "name": "database",
+      "xScaleType": "ordinal",
+      "yScaleType": "ordinal",
+      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+      "data": [
+        {"key": "MySql", "value": "Adept"},
+        {"key": "PostgreSQL", "value": "Proficient"},
+        {"key": "SQLite", "value": "Proficient"}
+      ],
+      "xLabel": "Skill",
+      "yLabel": "Mastery"
+  },
+  {
+      "name": "tool",
+      "xScaleType": "ordinal",
+      "yScaleType": "ordinal",
+      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+      "data": [
+        {"key": "Git", "value": "Proficient"},
+        {"key": "Webpack", "value": "Familiar"},
+        {"key": "Docker", "value": "Proficient"},
+        {"key": "npm", "value": "Proficient"}
+      ],
+      "xLabel": "Skill",
+      "yLabel": "Mastery"
+  },
+  {
+      "name": "OS",
+      "xScaleType": "ordinal",
+      "yScaleType": "ordinal",
+      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+      "data": [
+        {"key": "Windows", "value": "Proficient"},
+        {"key": "Linux", "value": "Proficient"}
+      ],
+      "xLabel": "Skill",
+      "yLabel": "Mastery"
+  }
+]
