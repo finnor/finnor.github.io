@@ -126,7 +126,9 @@ export default {
     hideNonSelected: function(selectedChart) {
       let svg = d3.select(this.$refs.svg);
       
-      svg.attr("height", this.constants.HEIGHT + this.constants.MARGINTOP + this.constants.MARGINBOTTOM);
+      svg.attr("viewBox", "0 0 "
+          + this.constants.CONTAINERWIDTH
+          + " " + (this.constants.HEIGHT + this.constants.MARGINTOP + this.constants.MARGINBOTTOM));
       this.params.charts.forEach((chart, index) => {
         if(document.getElementById("chart-" + index)!==null) {
           if (index===selectedChart) {
@@ -224,7 +226,9 @@ export default {
     },
     showAll: function() {
       let svg = d3.select(this.$refs.svg);
-      svg.attr("height", (this.constants.HEIGHT + this.constants.MARGINTOP + this.constants.MARGINBOTTOM)*this.params.charts.length);
+      svg.attr("viewBox", "0 0 "
+          + this.constants.CONTAINERWIDTH
+          + " " + ((this.constants.HEIGHT + this.constants.MARGINTOP + this.constants.MARGINBOTTOM)*this.params.charts.length));
 
       this.params.charts.forEach((chart, index) => {
         if(document.getElementById("chart-" + index)!==null) {
@@ -239,8 +243,10 @@ export default {
     renderChart: function() {
       d3.select(this.$refs.svg)
         .attr("class", "bar-chart-svg")
-        .attr("width", this.constants.CONTAINERWIDTH)
-        .attr("height", this.constants.HEIGHT + this.constants.MARGINTOP + this.constants.MARGINBOTTOM);
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 "
+          + this.constants.CONTAINERWIDTH
+          + " " + (this.constants.HEIGHT + this.constants.MARGINTOP + this.constants.MARGINBOTTOM));
 
       this.createNewChart(0, 0);
     }
