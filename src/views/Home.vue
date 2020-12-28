@@ -43,11 +43,8 @@
             ></gauge-chart>
             <donut-chart class="col-md-6"
               :params="{
-                'general': {
-                  'width': 500,
-                  'isPercent': true,
-                  'chartLabel': 'Outside Work',
-                },
+                'isPercent': true,
+                'chartLabel': 'Outside Work',
                 'data': [
                   {
                     'label':'Reading',

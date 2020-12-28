@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center">
-    <h3 v-if="params.general.chartLabel">{{params.general.chartLabel}}</h3>
-    <svg :id="id"></svg>
+  <div ref="container" class="text-center">
+    <h3 v-if="params.chartLabel">{{params.chartLabel}}</h3>
+    <svg ref="svg"></svg>
   </div>
 </template>
 
@@ -13,22 +13,19 @@ export default {
   name: 'DonutChart',
   data() {
     return {
-      id: this.genId()
+      isCreated: false,
     }
   },
   props: {
     /**
      * Params for generating pie chart
      *
-     *      {"general": {
-     *           "width":,
-     *           "height":,
-     *           "outerRadius":,
-     *           "innerRadius":,
-     *           "element":,
-     *           "isPercent":,
-     *           "chartLabel":,
-     *           },
+     *       "width":,
+     *       "height":,
+     *       "outerRadius":,
+     *       "innerRadius":,
+     *       "isPercent":,
+     *       "chartLabel":,
      *       "data": {
      *           "label":,
      *           "value":,
@@ -46,40 +43,104 @@ export default {
       type: Object
     },
   },
-  methods: {
-    genId: function() {
-      return 'chart-'+Math.random().toString(36).substring(7);
-    },
-    renderChart: function() {
-      const ELEMENT = '#'+this.id;
-      const WIDTH = this.params.general.width || 300;
-      const HEIGHT = this.params.general.height || 150;
-      const INNERRADIUS = this.params.general.innerRadius || 15;
-      const OUTERRADIUS = this.params.general.outerRadius || 50;
+  computed: {
+    constants: function() {
+      const CONTAINERWIDTH = this.$refs.container.clientWidth;
+      const WIDTH = this.params.width || CONTAINERWIDTH;
+      const HEIGHT = this.params.height || WIDTH/2;
+      const INNERRADIUS = this.params.innerRadius || WIDTH/18;
+      const OUTERRADIUS = this.params.outerRadius || WIDTH/6;
       const LINETOLABELCORNER = OUTERRADIUS * 1.1;
       const LABELSIZE = OUTERRADIUS/4.5;
       const INNERTEXTSIZE = INNERRADIUS/1.5;
       const CENTER = [WIDTH / 2, HEIGHT/2];
-      const ISPERCENT = this.params.general.isPercent || false;
+      const ISPERCENT = this.params.isPercent || false;
+      const CHARTTOTAL = this.params.data.reduce((sum, a) => sum+a.value, 0);
+      return {
+        CONTAINERWIDTH: CONTAINERWIDTH,
+        WIDTH: WIDTH,
+        HEIGHT: HEIGHT,
+        INNERRADIUS: INNERRADIUS,
+        OUTERRADIUS: OUTERRADIUS,
+        LINETOLABELCORNER: LINETOLABELCORNER,
+        LABELSIZE: LABELSIZE,
+        INNERTEXTSIZE: INNERTEXTSIZE,
+        CENTER: CENTER,
+        ISPERCENT: ISPERCENT,
+        CHARTTOTAL: CHARTTOTAL
+      }
+    }
+  },
+  methods: {
+    hoverAction: function(event, data) {
+      //No animation unless creation completed
+      if (this.isCreated) {
+        const svg = d3.select(this.$refs.svg);
+        svg.select("#path" + data.index)
+          .transition()
+            .duration(500)
+            .ease(d3.easeBackOut)
+          .attr('transform', (d) => {
+            let dist = 0.05 * this.constants.OUTERRADIUS;
+            d.midAngle = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+            let x = Math.sin(d.midAngle) * dist;
+            let y = -Math.cos(d.midAngle) * dist;
+            return 'translate(' + x + ',' + y + ')';
+          });
 
+
+        //Bold label text
+        svg.select("#label" +  data.index)
+          .attr("font-weight", "bold");
+
+
+        //Set center text to percentage of total
+        let percent = ((data.data.value / ((this.constants.CHARTTOTAL>0) ? this.constants.CHARTTOTAL : 1))*100);
+        if (percent%1 > 0)
+          percent = percent.toFixed(1);
+        else
+          percent = percent.toFixed(0);
+        //Set center text
+        d3.select(".chartCenterValue").text(percent + "%");
+      }
+    },
+    mouseoutAction: function(event, data) {
+      //No animation unless creation completed
+      if (this.isCreated) {
+        const svg = d3.select(this.$refs.svg);
+        //Return animation
+        svg.select("#path" + data.index)
+          .transition()
+            .duration(500)
+            .ease(d3.easeBackIn)
+            .attr('transform', 'translate(0,0)')
+
+        //Unbold label text
+        svg.select("#label" + data.index)
+          .attr("font-weight", null);
+
+        //Clear text on leave
+        d3.select(".chartCenterValue").text(null);
+      }
+    },
+    renderChart: function() {
       let pieData = this.params.data.sort(function(a, b) {
         return a.value - b.value;
       });
-      let total = pieData.reduce((sum, a) => sum+a, 0);
-      let isCreationCompleted = false;
 
       //Check for empty data set
-      if (total===0) {
-        pieData[pieData.length] = {"label": "No data", "value": 1, "link":null};
-        total++;
+      if (this.constants.CHARTTOTAL===0) {
+        pieData[pieData.length] = {"label": "No data", "value": 1};
       }
 
       //Create chart area
-      const svg = d3.select(ELEMENT)
-        .attr("width", WIDTH)
-        .attr("height", HEIGHT)
+      const svg = d3.select(this.$refs.svg)
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 "
+          + this.constants.WIDTH
+          + " " + this.constants.HEIGHT)
         .append("g")
-          .attr("transform", "translate(" + CENTER[0] + "," + CENTER[1] + ")");
+          .attr("transform", "translate(" + this.constants.CENTER[0] + "," + this.constants.CENTER[1] + ")");
 
       //Create section for labels and lines to them
       svg.append("g")
@@ -96,12 +157,12 @@ export default {
       };
 
       //Function that will return the label for a given section
-      let chartLabel = function(d){
+      let chartLabel = (d) => {
         if (d.data.value === 0) {
           return null;
         } else if (d.data.label==='No data') {
           return d.data.label;
-        } else if (ISPERCENT) {
+        } else if (this.constants.ISPERCENT) {
           return d.data.label;
         } else {
           return d.data.label + '(' + d.data.value + ')';
@@ -113,14 +174,14 @@ export default {
 
       //Set radius for pie chart
       let arc = d3.arc()
-        .outerRadius(OUTERRADIUS)
-        .innerRadius(INNERRADIUS);
+        .outerRadius(this.constants.OUTERRADIUS)
+        .innerRadius(this.constants.INNERRADIUS);
 
 
       //Set radius for labels
       let outerArc = d3.arc()
-        .innerRadius(LINETOLABELCORNER)
-        .outerRadius(LINETOLABELCORNER);
+        .innerRadius(this.constants.LINETOLABELCORNER)
+        .outerRadius(this.constants.LINETOLABELCORNER);
 
       //Create pie chart
       let pie = d3.pie()
@@ -150,32 +211,31 @@ export default {
           })
           //On end of transition set creation completed flag
           //So other transitions can be used
-          .on("end", function() {
-            isCreationCompleted = true;
+          .on("end", () => {
+            this.isCreated = true;
           })
 
       //Elastic animation on hover
-      sections.on("mouseover", hoverAction)
+      sections.on("mouseover", this.hoverAction)
         //Return animation on mouseout
-        .on('mouseout', mouseoutAction);
+        .on('mouseout', this.mouseoutAction);
 
       sections.exit().remove();
 
       //Center Text
-      let center_group_data = svg.append("g")
-        .attr("transform", "translate(0, 0)");
-
-      let pieCenterValue = center_group_data.append("text")
-        .attr("dy", ".35em").attr("class", "chartCenterValue")
-        .attr("text-anchor", "middle")
-        .attr("font-size", INNERTEXTSIZE);
+      svg.append("g")
+        .attr("transform", "translate(0, 0)")
+        .append("text")
+          .attr("dy", ".35em").attr("class", "chartCenterValue")
+          .attr("text-anchor", "middle")
+          .attr("font-size", this.constants.INNERTEXTSIZE);
 
       //Returns the angle for the middle of a pie section
       function midAngle(d){
         return d.startAngle + (d.endAngle - d.startAngle)/2;
       }
 
-      let previous = -1 * LINETOLABELCORNER;
+      let previous = -1 * this.constants.LINETOLABELCORNER;
       let prevSide = 0;
       //Create labels
       let text = svg.select(".labels").selectAll("text")
@@ -189,27 +249,31 @@ export default {
             return midAngle(d) < Math.PI ? "start":"end";
           })
           .style("cursor", "default")
-          .attr("font-size", LABELSIZE)
+          .attr("font-size", this.constants.LABELSIZE)
           .attr("id", function(d, i) { return "label" + i })
+          //Elastic animation on hover
+          .on("mouseover", this.hoverAction)
+          //Return animation on mouseout
+          .on('mouseout', this.mouseoutAction)
           .transition().duration(2000)
-            .attr("transform", function(d) {
+            .attr("transform", (d) => {
               if (d.data.value===0) {
                 return null;
               }
               let pos = outerArc.centroid(d);
-              pos[0] = LINETOLABELCORNER*1.05 * (midAngle(d) < Math.PI ? 1 : -1);
+              pos[0] = this.constants.LINETOLABELCORNER*1.05 * (midAngle(d) < Math.PI ? 1 : -1);
 
               //If this and previous label are on the right side of the y-axis
               if (prevSide>0 && pos[0]>0) {
                 //If there wasn't enough room between previous label and this label
-                if (previous + LABELSIZE > pos[1]) {
-                  pos[1] = previous + LABELSIZE;
+                if (previous + this.constants.LABELSIZE > pos[1]) {
+                  pos[1] = previous + this.constants.LABELSIZE;
                 }
               //If this and previous label are on the left side of the y-axis
               } else if (prevSide<0 && pos[0]<0){
                 //If there wasn't enough room between previous label and this label
-                if (previous - LABELSIZE < pos[1]) {
-                  pos[1] = previous - LABELSIZE;
+                if (previous - this.constants.LABELSIZE < pos[1]) {
+                  pos[1] = previous - this.constants.LABELSIZE;
                 }
               }
               //Record previous side
@@ -218,18 +282,13 @@ export default {
               return "translate("+ pos +")";
             });
 
-      //Elastic animation on hover
-      text.on("mouseover", hoverAction)
-        //Return animation on mouseout
-        .on('mouseout', mouseoutAction);
-
       text.exit().remove();
 
       //Line from pie to label
       let polyline = svg.select(".lines").selectAll("polyline")
         .data(pie(pieData), key);
 
-      previous = -1 * LINETOLABELCORNER;
+      previous = -1 * this.constants.LINETOLABELCORNER;
       prevSide = 0;
       polyline.enter()
         .append("polyline")
@@ -238,24 +297,24 @@ export default {
           .style("fill", "none")
           .attr("stroke-width", 2)
           .transition().delay(2000)
-          .attr("points", function(d){
+          .attr("points", (d) => {
             if (d.data.value===0) {
               return null;
             }
             let pos = outerArc.centroid(d);
-            pos[0] = LINETOLABELCORNER * (midAngle(d) < Math.PI ? 1 : -1);
+            pos[0] = this.constants.LINETOLABELCORNER * (midAngle(d) < Math.PI ? 1 : -1);
 
             //If this and previous label are on the right side of the y-axis
             if (prevSide>0 && pos[0]>0) {
               //If there wasn't enough room between previous label and this label
-              if (previous + LABELSIZE > pos[1]) {
-                pos[1] = previous + LABELSIZE;
+              if (previous + this.constants.LABELSIZE > pos[1]) {
+                pos[1] = previous + this.constants.LABELSIZE;
               }
             //If this and previous label are on the left side of the y-axis
             } else if (prevSide<0 && pos[0]<0){
               //If there wasn't enough room between previous label and this label
-              if (previous - LABELSIZE < pos[1]) {
-                pos[1] = previous - LABELSIZE;
+              if (previous - this.constants.LABELSIZE < pos[1]) {
+                pos[1] = previous - this.constants.LABELSIZE;
               }
             }
             //Record previous side
@@ -263,60 +322,6 @@ export default {
             previous = pos[1];
             return [arc.centroid(d), outerArc.centroid(d), pos];
           });
-
-      //Elastic animation on hover
-      function hoverAction(event, data) {
-        //No animation unless creation completed
-        if (isCreationCompleted) {
-          d3.select(ELEMENT + " #path" + data.index)
-            .transition()
-              .duration(500)
-              .ease(d3.easeBackOut)
-            .attr('transform', function (d) {
-              let dist = 0.05 * OUTERRADIUS;
-              d.midAngle = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
-              let x = Math.sin(d.midAngle) * dist;
-              let y = -Math.cos(d.midAngle) * dist;
-              return 'translate(' + x + ',' + y + ')';
-            });
-
-
-          //Bold label text
-          d3.select(ELEMENT + ' #label' +  data.index)
-            .attr("font-weight", "bold");
-
-
-          //Set center text to percentage of total
-          let percent = ((data.data.value / total)*100);
-          if (percent%1 > 0)
-            percent = percent.toFixed(1);
-          else
-            percent = percent.toFixed(0);
-          //Set center text
-            pieCenterValue.text(percent + "%");
-        }
-      }
-
-
-      //Return animation on mouseout
-      function mouseoutAction(event, data) {
-        //No animation unless creation completed
-        if (isCreationCompleted) {
-          //Return animation
-          d3.select(ELEMENT + ' #path' + data.index)
-            .transition()
-              .duration(500)
-              .ease(d3.easeBackIn)
-              .attr('transform', 'translate(0,0)')
-
-          //Unbold label text
-          d3.select(ELEMENT + ' #label' + data.index)
-            .attr("font-weight", null);
-
-          //Clear text on leave
-          pieCenterValue.text(null);
-        }
-      }
     }
   },
   mounted () {
