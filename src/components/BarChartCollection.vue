@@ -16,7 +16,7 @@
 
 <script>
 import * as d3 from "d3";
-import {schemeCategory10} from "d3-scale-chromatic";
+import {schemeSet2} from "d3-scale-chromatic";
 
 export default {
   name: 'BarChartCollection',
@@ -171,7 +171,7 @@ export default {
       }
 
 
-      let colorScale = d3.scaleOrdinal(schemeCategory10);
+      let colorScale = d3.scaleOrdinal(schemeSet2);
 
       let xAxis = d3.axisBottom()
         .scale(x);
