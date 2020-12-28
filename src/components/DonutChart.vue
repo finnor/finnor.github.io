@@ -45,11 +45,10 @@ export default {
   },
   computed: {
     constants: function() {
-      const CONTAINERWIDTH = this.$refs.container.clientWidth;
-      const WIDTH = this.params.width || CONTAINERWIDTH;
-      const HEIGHT = this.params.height || WIDTH/2;
-      const INNERRADIUS = this.params.innerRadius || WIDTH/18;
-      const OUTERRADIUS = this.params.outerRadius || WIDTH/6;
+      const WIDTH = this.params.width ?? this.$refs.container.clientWidth;
+      const HEIGHT = this.params.height ?? WIDTH/2;
+      const INNERRADIUS = this.params.innerRadius ?? WIDTH/18;
+      const OUTERRADIUS = this.params.outerRadius ?? WIDTH/6;
       const LINETOLABELCORNER = OUTERRADIUS * 1.1;
       const LABELSIZE = OUTERRADIUS/4.5;
       const INNERTEXTSIZE = INNERRADIUS/1.5;
@@ -57,7 +56,6 @@ export default {
       const ISPERCENT = this.params.isPercent || false;
       const CHARTTOTAL = this.params.data.reduce((sum, a) => sum+a.value, 0);
       return {
-        CONTAINERWIDTH: CONTAINERWIDTH,
         WIDTH: WIDTH,
         HEIGHT: HEIGHT,
         INNERRADIUS: INNERRADIUS,

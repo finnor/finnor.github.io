@@ -1,8 +1,8 @@
 <template>
-  <div class="text-center">
-    <h3 v-if="this.params.general.chartLabel">{{this.params.general.chartLabel}}</h3>
-    <svg :id="id"></svg>
-    <div class="gauge-footer"></div>
+  <div ref="container" class="text-center">
+    <h3 v-if="this.params.chartLabel">{{this.params.chartLabel}}</h3>
+    <svg ref="svg"></svg>
+    <div class="gauge-footer font-weight-bold"></div>
   </div>
 </template>
 
@@ -12,49 +12,42 @@ import gaugeStatuses from "@/config/gaugeStatuses.json";
 
 export default {
   name: 'GaugeChart',
-  data() {
-    return {
-      id: this.genId()
-    }
-  },
   props: {
     /**
      * Params for generating gauge chart
      *
-     *      {"general": {
-     *        "size":,
-     *        
-     *        "pointerWidth":,
-     *        "pointerTailLength":,
-     *        "pointerTailLengthPercent":,
-     *        
-     *        "clipWidth":
-     *        "clipHeight":
-     *        
-     *        "ringInset":
-     *        "ringWidth":
-     *        "labelInset":
-     *        
-     *        "minAngle":
-     *        "maxAngle":
-     *                    
-     *        "minValue": 
-     *        "maxValue":
-     *        "majorTicks":
-     *        
-     *        "lowThreshold":
-     *        "highThreshold":
-     *        "lowThresholdColor":
-     *        "mediumThresholdColor":
-     *        "highThresholdColor":
-     *        
-     *        "transitionTime":
-     *        
-     *        "labelFormat":
-     *        "rotateLabels":
-     *        
-     *        "chartLabel":
-     *        },
+     *      "size":,
+     *      
+     *      "pointerWidth":,
+     *      "pointerTailLength":,
+     *      "pointerTailLengthPercent":,
+     *      
+     *      "clipWidth":
+     *      "clipHeight":
+     *      
+     *      "ringInset":
+     *      "ringWidth":
+     *      "labelInset":
+     *      
+     *      "minAngle":
+     *      "maxAngle":
+     *                  
+     *      "minValue": 
+     *      "maxValue":
+     *      "majorTicks":
+     *      
+     *      "lowThreshold":
+     *      "highThreshold":
+     *      "lowThresholdColor":
+     *      "mediumThresholdColor":
+     *      "highThresholdColor":
+     *      
+     *      "transitionTime":
+     *      
+     *      "labelFormat":
+     *      "rotateLabels":
+     *      
+     *      "chartLabel":
      *
      *
      *
@@ -64,38 +57,64 @@ export default {
       type: Object
     },
   },
-  methods: {
-    genId: function() {
-      return 'chart-'+Math.random().toString(36).substring(7);
-    },
-    renderChart: function() {
-      const ELEMENT = '#'+this.id;
-      const SIZE = this.params.general.size || 400;
+  computed: {
+    constants: function() {
+      const SIZE = this.params.size ?? this.$refs.container.clientWidth;
       const RADIUS = SIZE/2;
-      const POINTERWIDTH = this.params.general.pointerWidth || SIZE/60;
-      const POINTERTAILLENGTH = this.params.general.pointerTailLength || SIZE/80;
-      const POINTERHEADLENGTPERCENT = this.params.general.pointerHeadLengthPercent || 0.8;
+      const POINTERWIDTH = this.params.pointerWidth ?? SIZE/60;
+      const POINTERTAILLENGTH = this.params.pointerTailLength ?? SIZE/80;
+      const POINTERHEADLENGTPERCENT = this.params.pointerHeadLengthPercent ?? 0.8;
       const POINTERHEADLENGTH = Math.round(RADIUS * POINTERHEADLENGTPERCENT);
-      const CLIPWIDTH = this.params.general.clipWidth || SIZE;
-      const CLIPHEIGHT = this.params.general.clipHeight || SIZE/2 + 2*POINTERTAILLENGTH;
-      const RINGINSET = this.params.general.ringInset || RADIUS/10;
-      const RINGWIDTH = this.params.general.ringWidth || RADIUS/20;
-      const LABELINSET = this.params.general.labelInset || RADIUS/10;
+      const CLIPWIDTH = this.params.clipWidth ?? SIZE;
+      const CLIPHEIGHT = this.params.clipHeight ?? SIZE/2 + 2*POINTERTAILLENGTH;
+      const RINGINSET = this.params.ringInset ?? RADIUS/10;
+      const RINGWIDTH = this.params.ringWidth ?? RADIUS/20;
+      const LABELINSET = this.params.labelInset ?? RADIUS/10;
       const MINANGLE = -70;
       const MAXANGLE = 70;
       const RANGE = MAXANGLE - MINANGLE;
-      const MINVALUE = this.params.general.minValue || 0;
-      const MAXVALUE = this.params.general.maxValue || 100;
-      const MAJORTICKS = this.params.general.majorTicks || ((MAXVALUE-MINVALUE)/10);
-      const LOWTHRESHOLD = this.params.general.lowThreshold || 33;
-      const HIGHTHRESHOLD = this.params.general.highThreshold || 67;
-      const LOWTHRESHOLDCOLOR = this.params.general.lowThresholdColor || '#B22222';
-      const MEDIUMTHRESHOLDCOLOR = this.params.general.mediumThresholdColor || 'steelblue';
-      const HIGHTHRESHOLDCOLOR = this.params.general.highThreshold || '#008000';
-      const TRANSITIONTIME = this.params.general.transitionTime || 2000;
-      const LABELFORMAT = this.params.general.labelFormat || d3.format('d');
-      const ROTATELABELS = this.params.general.rotateLabels || true;
-
+      const MINVALUE = this.params.minValue ?? 0;
+      const MAXVALUE = this.params.maxValue ?? 100;
+      const MAJORTICKS = this.params.majorTicks ?? ((MAXVALUE-MINVALUE)/10);
+      const LOWTHRESHOLD = this.params.lowThreshold ?? 33;
+      const HIGHTHRESHOLD = this.params.highThreshold ?? 67;
+      const LOWTHRESHOLDCOLOR = this.params.lowThresholdColor ?? '#B22222';
+      const MEDIUMTHRESHOLDCOLOR = this.params.mediumThresholdColor ?? '#4682b4';
+      const HIGHTHRESHOLDCOLOR = this.params.highThreshold ?? '#008000';
+      const TRANSITIONTIME = this.params.transitionTime ?? 2000;
+      const LABELFORMAT = this.params.labelFormat ?? d3.format('d');
+      const ROTATELABELS = this.params.rotateLabels ?? true;
+      return {
+        SIZE: SIZE,
+        RADIUS: RADIUS,
+        POINTERWIDTH: POINTERWIDTH,
+        POINTERTAILLENGTH: POINTERTAILLENGTH,
+        POINTERHEADLENGTPERCENT: POINTERHEADLENGTPERCENT,
+        POINTERHEADLENGTH: POINTERHEADLENGTH,
+        CLIPWIDTH: CLIPWIDTH,
+        CLIPHEIGHT: CLIPHEIGHT,
+        RINGINSET: RINGINSET,
+        RINGWIDTH: RINGWIDTH,
+        LABELINSET: LABELINSET,
+        MINANGLE: MINANGLE,
+        MAXANGLE: MAXANGLE,
+        RANGE: RANGE,
+        MINVALUE: MINVALUE,
+        MAXVALUE: MAXVALUE,
+        MAJORTICKS: MAJORTICKS,
+        LOWTHRESHOLD: LOWTHRESHOLD,
+        HIGHTHRESHOLD: HIGHTHRESHOLD,
+        LOWTHRESHOLDCOLOR: LOWTHRESHOLDCOLOR,
+        MEDIUMTHRESHOLDCOLOR: MEDIUMTHRESHOLDCOLOR,
+        HIGHTHRESHOLDCOLOR: HIGHTHRESHOLDCOLOR,
+        TRANSITIONTIME: TRANSITIONTIME,
+        LABELFORMAT: LABELFORMAT,
+        ROTATELABELS: ROTATELABELS
+      }
+    }
+  },
+  methods: {
+    renderChart: function() {
       let arcColorFn;
       let numberDiv;
       let svg;
@@ -113,37 +132,39 @@ export default {
       // a linear scale that maps domain values to a percent from 0..1
       scale = d3.scaleLinear()
         .range([0,1])
-        .domain([MINVALUE, MAXVALUE]);
+        .domain([this.constants.MINVALUE, this.constants.MAXVALUE]);
 
-      let colorDomain = [LOWTHRESHOLD, HIGHTHRESHOLD, MAXVALUE].map(scale),
-          colorRange  = [LOWTHRESHOLDCOLOR, MEDIUMTHRESHOLDCOLOR, HIGHTHRESHOLDCOLOR];
+      let colorDomain = [this.constants.LOWTHRESHOLD, this.constants.HIGHTHRESHOLD, this.constants.MAXVALUE].map(scale),
+          colorRange  = [this.constants.LOWTHRESHOLDCOLOR, this.constants.MEDIUMTHRESHOLDCOLOR, this.constants.HIGHTHRESHOLDCOLOR];
 
       arcColorFn = d3.scaleLinear().domain(colorDomain).range(colorRange);
-      ticks = scale.ticks(MAXVALUE/MAJORTICKS);
-      tickData = [LOWTHRESHOLD, HIGHTHRESHOLD, MAXVALUE]
+      ticks = scale.ticks(this.constants.MAXVALUE/this.constants.MAJORTICKS);
+      tickData = [this.constants.LOWTHRESHOLD, this.constants.HIGHTHRESHOLD, this.constants.MAXVALUE]
         .map(function(d) {return scale(d); });
 
       arc = d3.arc()
-        .innerRadius(RADIUS - RINGWIDTH - RINGINSET)
-        .outerRadius(RADIUS - RINGINSET)
-        .startAngle(function(d, i) {
-          let ratio = i > 0 ? tickData[i-1] : MINVALUE;
-          return deg2rad(MINANGLE + (ratio * RANGE));
+        .innerRadius(this.constants.RADIUS - this.constants.RINGWIDTH - this.constants.RINGINSET)
+        .outerRadius(this.constants.RADIUS - this.constants.RINGINSET)
+        .startAngle((d, i) => {
+          let ratio = i > 0 ? tickData[i-1] : this.constants.MINVALUE;
+          return deg2rad(this.constants.MINANGLE + (ratio * this.constants.RANGE));
         })
-        .endAngle(function(d, i) {
+        .endAngle((d, i) => {
           let ratio = tickData[i];
-          return deg2rad(MINANGLE + (ratio * RANGE));
+          return deg2rad(this.constants.MINANGLE + (ratio * this.constants.RANGE));
         });
 
-      let centerTranslation = function() {
-        return 'translate('+ RADIUS +','+ RADIUS +')';
+      let centerTranslation = () => {
+        return 'translate('+ this.constants.RADIUS +','+ this.constants.RADIUS +')';
       }
 
-      let render = function(newValue, newStatus) {
-        svg = d3.select(ELEMENT)
+      let render = (newValue, newStatus) => {
+        const svg = d3.select(this.$refs.svg)
           .attr('class', 'gauge')
-          .attr('width', CLIPWIDTH)
-          .attr('height', CLIPHEIGHT);
+          .attr("preserveAspectRatio", "xMinYMin meet")
+          .attr("viewBox", "0 0 "
+            + this.constants.CLIPWIDTH
+            + " " + this.constants.CLIPHEIGHT);
 
         let centerTx = centerTranslation();
 
@@ -168,20 +189,20 @@ export default {
         lg.selectAll('text')
           .data(ticks)
           .enter().append('text')
-            .attr('transform', function(d) {
-              if (ROTATELABELS) {
+            .attr('transform', (d) => {
+              if (this.constants.ROTATELABELS) {
                 let ratio = scale(d);
-                let newAngle = MINANGLE + (RANGE*ratio);
-                  return 'rotate(' +newAngle +') translate(0,' +(LABELINSET + RINGINSET + RINGWIDTH - RADIUS) +')';
+                let newAngle = this.constants.MINANGLE + (this.constants.RANGE*ratio);
+                  return 'rotate(' +newAngle +') translate(0,' +(this.constants.LABELINSET + this.constants.RINGINSET + this.constants.RINGWIDTH - this.constants.RADIUS) +')';
               } else {
                 let ratio = scale(d);
-                let newAngle = deg2rad(MINANGLE + (ratio * RANGE)),
-                y = (LABELINSET + RINGINSET + RINGWIDTH - RADIUS) * Math.cos(newAngle),
-                x =  -1 * (LABELINSET + RINGINSET + RINGWIDTH - RADIUS) * Math.sin(newAngle);
+                let newAngle = deg2rad(this.constants.MINANGLE + (ratio * this.constants.RANGE)),
+                y = (this.constants.LABELINSET + this.constants.RINGINSET + this.constants.RINGWIDTH - this.constants.RADIUS) * Math.cos(newAngle),
+                x =  -1 * (this.constants.LABELINSET + this.constants.RINGINSET + this.constants.RINGWIDTH - this.constants.RADIUS) * Math.sin(newAngle);
                 return 'translate(' + x + ',' + y +')';
               }
             })
-            .text(LABELFORMAT);
+            .text(this.constants.LABELFORMAT);
 
         lg.selectAll('line')
           .data(ticks)
@@ -190,21 +211,21 @@ export default {
             .attr('x1', 0)
             .attr('y1', 0)
             .attr('x2', 0)
-            .attr('y2', RINGWIDTH * 2 - RINGINSET / 1.5)
-            .attr('transform', function(d) {
+            .attr('y2', this.constants.RINGWIDTH * 2 - this.constants.RINGINSET / 1.5)
+            .attr('transform', (d) => {
               let ratio = scale(d);
-              let newAngle = MINANGLE + (RANGE * ratio);
-              return 'rotate(' +newAngle +') translate(0,' + (RINGINSET + RINGWIDTH - RADIUS) +')';
+              let newAngle = this.constants.MINANGLE + (this.constants.RANGE * ratio);
+              return 'rotate(' +newAngle +') translate(0,' + (this.constants.RINGINSET + this.constants.RINGWIDTH - this.constants.RADIUS) +')';
             })
             .style('stroke', '#666')
             .style('stroke-width', '1px');
 
         let lineData = [
-          [POINTERWIDTH / 2, 0],
-          [0, -POINTERHEADLENGTH],
-          [-(POINTERWIDTH / 2), 0],
-          [0, POINTERTAILLENGTH],
-          [POINTERWIDTH / 2, 0]
+          [this.constants.POINTERWIDTH / 2, 0],
+          [0, -this.constants.POINTERHEADLENGTH],
+          [-(this.constants.POINTERWIDTH / 2), 0],
+          [0, this.constants.POINTERTAILLENGTH],
+          [this.constants.POINTERWIDTH / 2, 0]
         ];
 
         let pointerLine = d3.line().curve(d3.curveMonotoneX);
@@ -215,7 +236,7 @@ export default {
 
         pointer = pg.append('path')
           .attr('d', pointerLine )
-          .attr('transform', 'rotate(' + MINANGLE +')');
+          .attr('transform', 'rotate(' + this.constants.MINANGLE +')');
 
         numberDiv = d3.select('.gauge-footer');
 
@@ -230,21 +251,21 @@ export default {
         update(newValue === undefined ? 0 : newValue, newStatus === undefined ? "" : newStatus);
       }
 
-      let update = function(newValue, newStatus) {
+      let update = (newValue, newStatus) => {
         let value = [newValue];
 
         let ratio = scale(newValue);
-        let newAngle = MINANGLE + (ratio * RANGE);
+        let newAngle = this.constants.MINANGLE + (ratio * this.constants.RANGE);
 
         pointer.transition()
-          .duration(TRANSITIONTIME)
+          .duration(this.constants.TRANSITIONTIME)
             .ease(d3.easeCubicInOut)
             .attr('transform', 'rotate(' +newAngle +')');
 
         d3.select('.gauge-value')
           .data(value)
           .transition()
-            .duration(TRANSITIONTIME)
+            .duration(this.constants.TRANSITIONTIME)
             .ease(d3.easeQuad)
             .style('color', arcColorFn( scale(newValue) ))
             .tween("text", function(d) {
@@ -277,7 +298,7 @@ export default {
         }
       }
 
-      let getAWorkReading = function() {
+      let getAWorkReading = () => {
         let typeOfOutcome = Math.random();
         let outcome = {
             "efficiency" : 0,
@@ -290,11 +311,11 @@ export default {
           outcome.status = getStatus("good");
         //Else if an small hiccup
         } else if (typeOfOutcome >.1){
-          outcome.efficiency = (Math.random()*(HIGHTHRESHOLD-LOWTHRESHOLD)) + LOWTHRESHOLD;
+          outcome.efficiency = (Math.random()*(this.constants.HIGHTHRESHOLD-this.constants.LOWTHRESHOLD)) + this.constants.LOWTHRESHOLD;
           outcome.status = getStatus("hiccup");
         //Else a disaster
         } else {
-          outcome.efficiency = (Math.random()*LOWTHRESHOLD);
+          outcome.efficiency = (Math.random()*this.constants.LOWTHRESHOLD);
           outcome.status = getStatus("disaster");
         }
         return outcome;

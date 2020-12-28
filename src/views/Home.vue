@@ -35,10 +35,7 @@
           <div class="row">
             <gauge-chart class="col-md-6"
               :params="{
-                'general' : {
-                  'size': 400,
-                  'chartLabel': 'Work Productivity',
-                }
+                'chartLabel': 'Work Productivity',
               }"
             ></gauge-chart>
             <donut-chart class="col-md-6"
