@@ -117,7 +117,6 @@ export default {
     renderChart: function() {
       let arcColorFn;
       let numberDiv;
-      let svg;
       let arc;
       let scale;
       let ticks;

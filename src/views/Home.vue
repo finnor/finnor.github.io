@@ -23,7 +23,12 @@
           <div class="card w-100 border border-brand-secondary">
             <h1 class="card-header bg-white text-center"><i class="fa fa-mobile-alt"></i> Contact</h1>
             <div class="card-body">
-              <p>Email: aflannery@uabmc.edu</p>
+              <dl class="row">
+                <dt class="col-sm-3 font-weight-bold text-right">Github:</dt>
+                <dd class="col-sm-9"><a href="https://github.com/finnor" target="_blank" rel="noopener">https://github.com/finnor</a></dd>
+                <dt class="col-sm-3 font-weight-bold text-right">Email:</dt>
+                <dd class="col-sm-9">aflanry@gmail.com</dd>
+              </dl>
             </div>
           </div>
         </div>
