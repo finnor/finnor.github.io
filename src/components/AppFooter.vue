@@ -1,11 +1,20 @@
 <template>
   <footer>
-    <div class="offset-sm-3 col-sm-9 text-left">Adrian Flannery</div>
+    <div class="col-sm-12 text-center text-brand-secondary">
+      <p>
+        Copyright © {{ this.year }} Adrian Flannery • Birmingham, AL based Software Developer
+      </p>
+    </div>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'AppFooter'
+  name: 'AppFooter',
+  data() {
+    return {
+      year: new Date().getFullYear()
+    }
+  },
 }
 </script>

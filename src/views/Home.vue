@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <landing :sticky="false">
     <div class="welcome">
       <div class="welcome-message">
         You found me! Welcome!  <i class="far fa-hand-spock"></i>
       </div>
     </div>
 
-    <div class="container pt-5">
+    <div class="container pt-5 mt-5">
       <div class="row mb-5">
         <div class="col-sm-6 d-flex align-content-stretch ">
           <div class="card w-100 border border-brand-secondary">
@@ -307,7 +307,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </landing>
 </template>
 
 <style scoped>
@@ -317,6 +317,7 @@
 </style>
 
 <script>
+import Landing from '@/layouts/Landing.vue';
 import BarChartCollection from '@/components/BarChartCollection.vue';
 import DonutChart from "@/components/DonutChart.vue";
 import GaugeChart from '@/components/GaugeChart.vue';
@@ -324,7 +325,7 @@ import jobSkills from "@/config/jobSkills.json";
 
 export default {
   name: 'Home',
-  components: { BarChartCollection, DonutChart, GaugeChart },
+  components: { Landing, BarChartCollection, DonutChart, GaugeChart },
   data() {
     return {
       jobSkills: jobSkills

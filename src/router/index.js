@@ -14,6 +14,11 @@ const routes = [
     path: '/DNAAlignment',
     name: 'DnaAlignment',
     component: () => import('../views/DnaAlignment.vue')
+  },
+  {
+    path: '/minesweeper-js',
+    name: 'Minesweeper',
+    component: () => import('../views/Minesweeper.vue')
   }
 ]
 

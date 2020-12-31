@@ -1,16 +1,5 @@
 <template>
-  <div id="app" class="bg-brand-primary">
-    <app-nav/>
+  <div id="app">
     <router-view/>
-    <app-footer/>
   </div>
 </template>
-
-<script>
-import AppFooter from './components/AppFooter.vue'
-import AppNav from './components/AppNav.vue'
-export default {
-  components: { AppNav, AppFooter },
-  
-}
-</script>

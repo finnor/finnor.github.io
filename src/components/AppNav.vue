@@ -1,5 +1,5 @@
 <template>
-  <b-navbar ref="navFloating" toggleable="lg" type="dark" variant="brand-primary-gradient" :sticky="!isFloating" :class="[(isFloating) ? 'nav-floating' : 'navbar-fixed-top']">
+  <b-navbar ref="navFloating" toggleable="lg" type="dark" variant="brand-primary-gradient" :sticky="isSticky || !isFloating" :class="[(!isSticky && isFloating) ? 'nav-floating' : 'navbar-fixed-top']">
     <div class="container">
       <b-navbar-brand :to="{ name: 'Home'}">Adrian Flannery</b-navbar-brand>
 
@@ -7,7 +7,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/DNAAlignment">DNAAlignmentXY</b-nav-item>
+          <b-nav-item to="/minesweeper-js">MinesweeperJS</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </div>
@@ -21,6 +21,13 @@ export default {
   data() {
     return {
       isFloating: false,
+      isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent)
+    }
+  },
+  props: {
+    isSticky: {
+      default: false,
+      type: Boolean
     }
   },
   methods: {
@@ -31,22 +38,19 @@ export default {
     }
   },
   mounted() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (iOS) {
+    if (this.isSticky || this.isIOS) {
       this.isFloating = false;
     } else {
       this.determineFloating();
     }
   },
   created () {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (!iOS) {
+    if (!this.isSticky || !this.isIOS) {
       window.addEventListener('scroll', this.determineFloating);
     }
   },
   destroyed () {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (!iOS) {
+    if (!this.isSticky || !this.isIOS) {
       window.addEventListener('scroll', this.determineFloating);
     }
   },
