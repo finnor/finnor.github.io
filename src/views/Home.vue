@@ -80,6 +80,23 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
+              <router-link to="/MinesweeperJS"><img class="img-fluid d-block mx-auto" src="@/assets/images/MinesweeperJSPreview.jpeg" alt="MinesweeperJS"></router-link>
+            </div>
+            <div class="col-md-8">
+              <h2><router-link to="/MinesweeperJS">MinesweeperJS</router-link></h2>
+              <p class="lead text-muted">
+                A Javascript implementation of the classic minesweeper game with a helper to guide a player on how the game is played and show the patterns that can be used to solve the game.
+              </p>
+              <p class="text-lg">
+                &bull; <a href="https://github.com/finnor/MinesweeperJS" target="_blank" rel="noopener">git</a>
+                &bull; <a href="https://www.npmjs.com/package/minesjs" target="_blank" rel="noopener">npm</a>
+              </p>
+              <router-link to="/MinesweeperJS" class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></router-link>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-4">
               <a href="DNAAlignment/"><img class="img-fluid d-block mx-auto" src="@/assets/images/DNAAlignmentXY_sample.jpeg" alt="DNAAlignmentXY"></a>
             </div>
             <div class="col-md-8">
@@ -89,19 +106,6 @@
                   and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. Requires Silverlight.
                   <a href="DNAAlignment/" class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
                 </p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-4">
-              <a href="MinesweeperJS/"><img class="img-fluid d-block mx-auto" src="@/assets/images/minesweeperjs_sample.jpeg" alt="MinesweeperJS"></a>
-            </div>
-            <div class="col-md-8">
-              <h2><a href="MinesweeperJS/">MinesweeperJS</a></h2>
-              <p class="lead text-muted">
-                An early iteration of a project to help illustrate patterns used in solving Minesweeper.
-                <a href="MinesweeperJS/" class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
-              </p>
             </div>
           </div>
           <hr>

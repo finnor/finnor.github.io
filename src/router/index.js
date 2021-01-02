@@ -16,8 +16,8 @@ const routes = [
     component: () => import('../views/DnaAlignment.vue')
   },
   {
-    path: '/minesweeper-js',
-    name: 'Minesweeper',
+    path: '/MinesweeperJS',
+    name: 'MinesweeperJS',
     component: () => import('../views/Minesweeper.vue')
   }
 ]
