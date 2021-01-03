@@ -1,6 +1,6 @@
 <template>
   <div ref="container" class="text-center">
-    <div role="radiogroup" tabindex="-1" class="btn-group-toggle btn-group text-uppercase">
+    <div role="radiogroup" tabindex="-1" class="btn-group-toggle btn-group flex-wrap text-uppercase">
       <label :key="'btn-'+index" v-for="(chart, index) in params.charts" class="btn btn-brand-secondary" :class="(selected===index) ? 'active' : ''" @click="changeData(index)">
         <input type="radio" v-model="selected" :value="index">
         {{ chart.name }}

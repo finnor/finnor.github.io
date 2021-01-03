@@ -47,13 +47,13 @@ export default {
     }
   },
   created () {
-    if (!this.isSticky || !this.isIOS) {
+    if (!this.isSticky && !this.isIOS) {
       window.addEventListener('scroll', this.determineFloating);
     }
   },
   destroyed () {
-    if (!this.isSticky || !this.isIOS) {
-      window.addEventListener('scroll', this.determineFloating);
+    if (!this.isSticky && !this.isIOS) {
+      window.removeEventListener('scroll', this.determineFloating);
     }
   },
 }

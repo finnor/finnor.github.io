@@ -41,7 +41,7 @@
                       {{ spectrumReading[0] }}
                     </td>
                     <td>
-                      {{ spectrumReading[1] }}
+                      {{ Math.round((spectrumReading[1] + Number.EPSILON) * 1000) / 1000 }}
                     </td>
                   </tr>
                 </tbody>

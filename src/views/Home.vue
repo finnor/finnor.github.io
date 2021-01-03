@@ -19,15 +19,16 @@
             </div>
           </div>
         </div>
+        <div class="d-block d-sm-none mt-4">.</div>
         <div class="col-sm-6 d-flex align-content-stretch ">
           <div class="card w-100 border border-brand-secondary">
             <h1 class="card-header bg-white text-center"><i class="fa fa-mobile-alt"></i> Contact</h1>
             <div class="card-body">
               <dl class="row">
-                <dt class="col-sm-3 font-weight-bold text-right">Github:</dt>
-                <dd class="col-sm-9"><a href="https://github.com/finnor" target="_blank" rel="noopener">https://github.com/finnor</a></dd>
-                <dt class="col-sm-3 font-weight-bold text-right">Email:</dt>
-                <dd class="col-sm-9">aflanry@gmail.com</dd>
+                <dt class="col-3 font-weight-bold text-right">Git:</dt>
+                <dd class="col-9"><a href="https://github.com/finnor" target="_blank" rel="noopener">https://github.com/finnor</a></dd>
+                <dt class="col-3 font-weight-bold text-right">Email:</dt>
+                <dd class="col-9">aflanry@gmail.com</dd>
               </dl>
             </div>
           </div>
@@ -43,6 +44,7 @@
                 'chartLabel': 'Work Productivity',
               }"
             ></gauge-chart>
+            <hr class="d-block d-md-none col-sm-12">
             <donut-chart class="col-md-6"
               :params="{
                 'isPercent': true,

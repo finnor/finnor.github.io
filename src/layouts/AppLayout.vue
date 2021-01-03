@@ -2,7 +2,7 @@
   <div>
     <app-nav :is-sticky="true" />
     <slot/>
-    <app-footer/>
+    <app-footer class="mt-5"/>
   </div>
 </template>
 
