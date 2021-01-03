@@ -145,8 +145,11 @@
                   wk-shell-decomposition is a Cytoscape 3 app that performs a k-shell decomposition on a network using a weighted algorithm.
                   k-shell decomposition is a method that ranks the most important nodes in a network and partitions them into shells based on that rank.
                   The app also adjusts the layout of the network to packed concentric rings sorted by k-shell and applies a gradient to the color of the nodes by k-shell.
-                  <a href="http://apps.cytoscape.org/apps/wkshelldecomposition" target="_blank" rel=”noopener” class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
                 </p>
+                <p class="text-lg">
+                  &bull; <a href="https://github.com/finnor/wk-shell-decomposition" target="_blank" rel="noopener">git</a> 
+                </p>
+                <a href="http://apps.cytoscape.org/apps/wkshelldecomposition" target="_blank" rel=”noopener” class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
               </div>
             </div>
             <hr>
@@ -157,8 +160,11 @@
                   Do you like ice cream?
                   Big Spoon Alerts scrapes the web page of a local ice cream shop for its menu, then compares the it to the previous iteration of the menu.
                   Upon detecting changes, it generates an email notification to report the added and dropped flavors to the configured email address.
-                  <a href="https://github.com/finnor/big-spoon-alerts" target="_blank" rel=”noopener” class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
                 </p>
+                <p class="text-lg">
+                  &bull; <a href="https://github.com/finnor/big-spoon-alerts" target="_blank" rel="noopener">git</a> 
+                </p>
+                <a href="https://github.com/finnor/big-spoon-alerts" target="_blank" rel=”noopener” class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
               </div>
             </div>
             <hr>
@@ -169,8 +175,11 @@
                 Are there any posts that receive regular updates on Reddit you follow, e.g. &quot;Best Of&quot; lists, FAQs, etc?
                 Reddit Submission Diff uses the Reddit API to read the content of a designated post, then compares the post to the previous content of the post.
                 It will then report a diff of the post's content to the configured email address.
-                <a href="https://github.com/finnor/reddit-submission-diff" target="_blank" rel=”noopener” class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
               </p>
+              <p class="text-lg">
+                &bull; <a href="https://github.com/finnor/reddit-submission-diff" target="_blank" rel="noopener">git</a> 
+              </p>
+              <a href="https://github.com/finnor/reddit-submission-diff" target="_blank" rel=”noopener” class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
             </div>
           </div>
         </div>
