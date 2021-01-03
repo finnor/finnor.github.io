@@ -11,8 +11,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/DNAAlignment',
-    name: 'DnaAlignment',
+    path: '/DNAAlignmentXY',
+    name: 'DNAAlignmentXY',
     component: () => import('../views/DnaAlignment.vue')
   },
   {

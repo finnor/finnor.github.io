@@ -97,20 +97,6 @@
           <hr>
           <div class="row">
             <div class="col-md-4">
-              <a href="/DNAAlignment"><img class="img-fluid d-block mx-auto" src="@/assets/images/DNAAlignmentXY_sample.jpeg" alt="DNAAlignmentXY"></a>
-            </div>
-            <div class="col-md-8">
-              <h2><a href="/DNAAlignment">DNA Alignment XY</a></h2>
-                <p class="lead text-muted">
-                  In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local
-                  and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. Requires Silverlight.
-                  <a href="/DNAAlignment" class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></a>
-                </p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-4">
               <router-link to="/SpectrumToRGB"><img class="img-fluid d-block mx-auto" src="@/assets/images/SpectrumToRGB_sample.jpeg" alt="SpectrumToRGB"></router-link>
             </div>
             <div class="col-md-8">
@@ -124,6 +110,23 @@
                 &bull; <a href="https://www.npmjs.com/package/spectrum-to-rgb" target="_blank" rel="noopener">npm</a>
               </p>
               <router-link to="/SpectrumToRGB" class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></router-link>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-4">
+              <router-link to="/DNAAlignmentXY"><img class="img-fluid d-block mx-auto" src="@/assets/images/DNAAlignmentXY_sample.jpeg" alt="DNAAlignmentXY"></router-link>
+            </div>
+            <div class="col-md-8">
+              <h2><router-link to="/DNAAlignmentXY">DNA Alignment XY</router-link></h2>
+                <p class="lead text-muted">
+                  In 2014, researchers combined two artificial codons into the genetic code of a viable, self-replicating organism. This project takes the local
+                  and global sequence alignment algorithms and adapts them to use separate scoring strategies for natural and artificial codons. Requires Silverlight.
+                </p>
+                <p class="text-lg">
+                  &bull; <a href="https://github.com/finnor-archive/base/tree/master/C%23/DNAAlignmentXYWeb" target="_blank" rel="noopener">git</a> 
+                </p>
+                <router-link to="/DNAAlignmentXY" class="float-right btn btn-brand-secondary btn-sm"><i class="fa fa-angle-double-right fa-lg"></i></router-link>
             </div>
           </div>
         </div>
