@@ -19,6 +19,11 @@ const routes = [
     path: '/MinesweeperJS',
     name: 'MinesweeperJS',
     component: () => import('../views/Minesweeper.vue')
+  },
+  {
+    path: '/SpectrumToRGB',
+    name: 'SpectrumToRGB',
+    component: () => import('../views/SpectrumToRGB.vue')
   }
 ]
 
