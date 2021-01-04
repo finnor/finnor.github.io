@@ -27,7 +27,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "execa": "^5.0.0",
-    "minesjs": "^1.0.0",
+    "minesjs": "^1.0.2",
     "popper.js": "^1.16.1",
     "portal-vue": "^2.1.7",
     "sass": "^1.30.0",
