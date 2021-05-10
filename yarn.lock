@@ -5651,6 +5651,30 @@ mimic-fn@^2.1.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
 
+minesjs@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/minesjs/-/minesjs-1.0.2.tgz#d8b863d02490e3ef7e36e1ec3d5544595cb36db5"
+  integrity sha512-oUBgVgrtl6AOPBZKAZ3O4rqBzkym6/4Yu7Wq8E1qWke/Cqe2ChluHUyrsigPgPruBGvJDlXZrck7UkvW4AYtAA==
+  dependencies:
+    minesweeperjs-engine "^1.0.3"
+    minesweeperjs-solver "^1.0.2"
+    minesweeperjs-ui "^1.0.5"
+
+minesweeperjs-engine@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/minesweeperjs-engine/-/minesweeperjs-engine-1.0.3.tgz#f24c9832f6fc0ed47811e7fb5e5060055dc7837b"
+  integrity sha512-zvDSHAnq4mA4uGtKRMPUC/yPYABlsDG9ji2+BaeAQGZAV9R0BajwF0CWEJoJy/3bksfxNvz53PtzETb0lBvUKw==
+
+minesweeperjs-solver@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/minesweeperjs-solver/-/minesweeperjs-solver-1.0.2.tgz#25be5018e3c5a2faca9e1109784677ffcb3d4218"
+  integrity sha512-ly0c7NhYOnduPg1xtNtnjXbuquHeGQrxLIP4s/a/8Z3lDbBsB+Qwl7SpIO7rAwpKLgdyQamaxYER8Aa8mOT12Q==
+
+minesweeperjs-ui@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/minesweeperjs-ui/-/minesweeperjs-ui-1.0.5.tgz#06a58385efb44e7f6ce9479661e59a9d359dd257"
+  integrity sha512-/3VmPyEC44x7cmXCq+Brsfmu8ABLQQpUJ2GBNzyoxq0Tb+Dn2z7SRN7JeIMgUrpehiymFXC3W3PdzAvNtTxLaw==
+
 mini-css-extract-plugin@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-0.9.0.tgz#47f2cf07aa165ab35733b1fc97d4c46c0564339e"
@@ -8320,9 +8344,9 @@ url-loader@^2.2.0:
     schema-utils "^2.5.0"
 
 url-parse@^1.4.3, url-parse@^1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.7.tgz#a8a83535e8c00a316e403a5db4ac1b9b853ae278"
-  integrity sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.1.tgz#d5fa9890af8a5e1f274a2c98376510f6425f6e3b"
+  integrity sha512-HOfCOUJt7iSYzEx/UqgtwKRMC6EU91NFhsCHMv9oM03VJcVo2Qrp8T8kI9D7amFf1cu+/3CEhgb3rF9zL7k85Q==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
