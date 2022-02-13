@@ -4157,9 +4157,9 @@ flush-write-stream@^1.0.0:
     readable-stream "^2.3.6"
 
 follow-redirects@^1.0.0:
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.1.tgz#5f69b813376cee4fd0474a3aba835df04ab763b7"
-  integrity sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
+  version "1.14.8"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
+  integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -5650,6 +5650,30 @@ mimic-fn@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
+
+minesjs@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/minesjs/-/minesjs-1.0.2.tgz#d8b863d02490e3ef7e36e1ec3d5544595cb36db5"
+  integrity sha512-oUBgVgrtl6AOPBZKAZ3O4rqBzkym6/4Yu7Wq8E1qWke/Cqe2ChluHUyrsigPgPruBGvJDlXZrck7UkvW4AYtAA==
+  dependencies:
+    minesweeperjs-engine "^1.0.3"
+    minesweeperjs-solver "^1.0.2"
+    minesweeperjs-ui "^1.0.5"
+
+minesweeperjs-engine@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/minesweeperjs-engine/-/minesweeperjs-engine-1.0.3.tgz#f24c9832f6fc0ed47811e7fb5e5060055dc7837b"
+  integrity sha512-zvDSHAnq4mA4uGtKRMPUC/yPYABlsDG9ji2+BaeAQGZAV9R0BajwF0CWEJoJy/3bksfxNvz53PtzETb0lBvUKw==
+
+minesweeperjs-solver@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/minesweeperjs-solver/-/minesweeperjs-solver-1.0.2.tgz#25be5018e3c5a2faca9e1109784677ffcb3d4218"
+  integrity sha512-ly0c7NhYOnduPg1xtNtnjXbuquHeGQrxLIP4s/a/8Z3lDbBsB+Qwl7SpIO7rAwpKLgdyQamaxYER8Aa8mOT12Q==
+
+minesweeperjs-ui@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/minesweeperjs-ui/-/minesweeperjs-ui-1.0.5.tgz#06a58385efb44e7f6ce9479661e59a9d359dd257"
+  integrity sha512-/3VmPyEC44x7cmXCq+Brsfmu8ABLQQpUJ2GBNzyoxq0Tb+Dn2z7SRN7JeIMgUrpehiymFXC3W3PdzAvNtTxLaw==
 
 mini-css-extract-plugin@^0.9.0:
   version "0.9.0"
