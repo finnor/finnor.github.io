@@ -5,11 +5,11 @@
       "yScaleType": "ordinal",
       "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
       "data": [
+        {"key": "Python", "value": "Adept"},
+        {"key": "Javascript", "value": "Adept"},
         {"key": "PHP", "value": "Adept"},
-        {"key": "Javascript", "value": "Proficient"},
-        {"key": "C#", "value": "Proficient"},
         {"key": "Java", "value": "Proficient"},
-        {"key": "Python", "value": "Proficient"}
+        {"key": "C#", "value": "Familiar"}
       ],
       "xLabel": "Skill",
       "yLabel": "Mastery"
@@ -20,10 +20,25 @@
       "yScaleType": "ordinal",
       "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
       "data": [
-        {"key": "Vue.js", "value": "Adept"},
+        {"key": "Pandas", "value": "Adept"},
+        {"key": "ggplot2", "value": "Proficient"},
         {"key": "D3.js", "value": "Proficient"},
-        {"key": "Laravel", "value": "Adept"},
-        {"key": "Bootstrap", "value": "Adept"}
+        {"key": "Laravel", "value": "Expert"},
+        {"key": "Vue.js", "value": "Adept"}
+      ],
+      "xLabel": "Skill",
+      "yLabel": "Mastery"
+  },
+  {
+      "name": "tool",
+      "xScaleType": "ordinal",
+      "yScaleType": "ordinal",
+      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
+      "data": [
+        {"key": "Nextflow", "value": "Adept"},
+        {"key": "Docker", "value": "Adept"},
+        {"key": "Singularity", "value": "Proficient"},
+        {"key": "Slurm", "value": "Proficient"}
       ],
       "xLabel": "Skill",
       "yLabel": "Mastery"
@@ -35,34 +50,8 @@
       "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
       "data": [
         {"key": "MySql", "value": "Adept"},
-        {"key": "PostgreSQL", "value": "Proficient"},
-        {"key": "SQLite", "value": "Proficient"}
-      ],
-      "xLabel": "Skill",
-      "yLabel": "Mastery"
-  },
-  {
-      "name": "tool",
-      "xScaleType": "ordinal",
-      "yScaleType": "ordinal",
-      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
-      "data": [
-        {"key": "Git", "value": "Proficient"},
-        {"key": "Webpack", "value": "Familiar"},
-        {"key": "Docker", "value": "Proficient"},
-        {"key": "npm", "value": "Proficient"}
-      ],
-      "xLabel": "Skill",
-      "yLabel": "Mastery"
-  },
-  {
-      "name": "OS",
-      "xScaleType": "ordinal",
-      "yScaleType": "ordinal",
-      "yScale": ["Novice", "Familiar", "Proficient", "Adept", "Expert"],
-      "data": [
-        {"key": "Windows", "value": "Proficient"},
-        {"key": "Linux", "value": "Proficient"}
+        {"key": "PostgreSQL", "value": "Adept"},
+        {"key": "NoSQL", "value": "Proficient"}
       ],
       "xLabel": "Skill",
       "yLabel": "Mastery"
